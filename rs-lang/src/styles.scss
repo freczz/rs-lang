@@ -1,1 +1,176 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+$maxwidth: 1200;
+
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+*,
+*::before,
+*::after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  max-width: $maxwidth+px;
+  padding: 0px 15px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    overflow: visible;
+  }
+
+}
+
+.btn {
+  background: transparent;
+  border: 2px solid #9e3af3;
+
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+  border-radius: 20px;
+  font-weight: 600;
+
+  &:hover {
+    border-radius: 20px;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s;
+    box-shadow: 0 0 10px rgba(158, 58, 243, 0.6);
+  }
+
+  span:first-child {
+    position: relative;
+    z-index: 1;
+  }
+
+  span:last-child {
+    position: absolute;
+    left: 0;
+    transition: all 0.8s cubic-bezier(0.68,-0.55,0.265,1.55) 0s;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 250%;
+      height: 250%;
+      z-index: 4;
+      transform: translate3d(-50%, -96%, 0) rotate(0) scale(1);
+    }
+
+    &:before {
+      background-color: rgba(179,107,243, 0.3);
+      border-radius: 48%;
+      animation: waves 5s infinite linear;
+    }
+
+    &:after {
+      background-color: rgba(158, 58, 243, 0.1);
+      border-radius: 42%;
+      animation: waves 10s infinite linear;
+    }
+
+  }
+
+  @keyframes waves{
+    
+    0%{
+      transform: translate3d(-50%, -96%, 0) rotate(0) scale(1);
+    }
+
+    100%{
+      transform: translate3d(-50%, -96%, 0) rotate(360deg) scale(1);
+    }
+
+  }
+
+}
+

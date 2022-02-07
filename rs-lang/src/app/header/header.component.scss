@@ -1,0 +1,337 @@
+$headerHeight: calc(50px + 30 * ((100vw - 400px) / (1200 - 400)));
+$headerBtnWidth: calc(80px + 20 * ((100vw - 768px) / (1920 - 768)));
+$headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
+
+.header {
+  background: linear-gradient(to top, #bdbcf3, 99%, #9e3af3);
+  border-bottom: 1px solid #7F7FA4;
+  box-shadow: 0 0 5px #9e3af3;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+
+  @media (max-width: 1200px) {
+    height: $headerHeight;
+  }
+
+  .header__body {
+    line-height: 80px;
+    position: relative;
+    display: flex;
+    font-size: 20px;
+
+    @media (max-width: 1200px) {
+      line-height: $headerHeight;
+      font-size: calc(16px + 4 * ((100vw - 768px) / (1200 - 768)));
+    }
+
+    .header__logo {
+      flex: 0 0 25%;
+      text-align: center;
+      position: relative;
+
+      img {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 5px;
+        height: 70px;
+        transition: 0.3s 0s;
+        transition: 0.3s 0s;
+
+        @media (max-width: 1200px) {
+          height: calc(40px + 30 * ((100vw - 400px) / (1200 - 400)));
+        }
+
+      }
+
+      .header__logo__main {
+        z-index: 12;
+
+        &:hover {
+          opacity: 0;
+        }
+
+      }
+
+      .header__logo__side {
+        z-index: 11;
+      }
+
+    }
+
+    .menu {
+
+      #menu__toggle {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+      }
+
+      .menu__btn {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: calc(12px + 8 * ((100vw - 420px) / (768 - 420)));
+        right: 20px;
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        opacity: 0;
+        z-index: -1;
+
+        @media (max-width: 768px) {
+          opacity: 1;
+          z-index: 1000;
+        }
+
+      }
+
+      .menu__btn > span,
+      .menu__btn > span::before,
+      .menu__btn > span::after {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #616161;
+        transition: .25s 0s;
+      }
+
+      .menu__btn > span::before {
+        content: '';
+        top: -8px;
+      }
+
+      .menu__btn > span::after {
+        content: '';
+        top: 8px;
+      }
+
+      #menu__toggle:checked ~ .menu__btn > span {
+        transform: rotate(45deg);
+      }
+      #menu__toggle:checked ~ .menu__btn > span::before {
+        top: 0;
+        transform: rotate(0);
+      }
+      #menu__toggle:checked ~ .menu__btn > span::after {
+        top: 0;
+        transform: rotate(90deg);
+      }
+
+    }
+
+    .nav {
+      flex: 0 0 50%;
+      background-size: 0;
+      
+      @media (max-width: 768px) {
+        position: fixed;
+        z-index: 100;
+        top: $headerHeight;
+        text-align: center;
+        right: -110vw;
+        width: 100vw;
+        height: calc(100vh - $headerHeight);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 80%;
+        background-color: #bdbcf3;
+        transition: .3s 0s;
+      }
+
+      .nav__list {
+        display: flex;
+        justify-content: space-between;
+
+        @media (max-width: 768px) {
+          margin-top: 30px;
+          height: 200px;
+          position: relative;
+          flex-direction: column;
+        }
+      
+      }
+
+      .nav__item {
+        position: relative;
+        z-index: 101;
+
+        .nav__link,
+        span {
+          color: #716DAB;
+          text-shadow: 0px 0px 1px #9e3af3;
+          font-weight: 600;
+
+          @media (max-width: 768px) {
+            font-size: calc(14px + 6 * ((100vw - 420px) / (768 - 420)));
+            text-shadow: 0 0 1px black;
+            text-transform: uppercase;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 25px;
+            width: 0;
+            height: 1px;
+            background-color: #000;
+            transition: all 0.3s ease 0s; 
+
+            @media (max-width: 1200px) {
+              bottom: calc(15px + 10 * ((100vw - 768px) / (1200 - 768)));
+            }
+
+            @media (max-width: 768px) {
+              bottom: 50%;
+              left: 0;
+            }
+
+          }
+
+          &::before {
+            content: '';
+
+            @media (max-width: 768px) {
+              position: absolute;
+              width: 0;
+              height: 1px;
+              background-color: #000;
+              transition: all 0.3s ease 0s; 
+              bottom: 50%;
+              right: 0;
+            }
+
+          }
+
+          &:hover {
+            color: #000;
+            transition: all 0.3s ease 0s;
+
+            &:after{
+              left: 0;
+              width: 100%;
+
+              @media (max-width: 768px) {
+                width: 35%;
+              }
+
+            }
+
+            &:before {
+
+              @media (max-width: 768px) {
+                width: 35%;
+              }
+
+            }
+
+          }
+          
+        }
+
+      }
+
+    }
+
+    .auth {
+      flex: 0 0 25%;
+      position: absolute;
+      right: calc(12.5% - 50px);
+
+      @media (max-width: 1200px) {
+        right: calc(12.5% - 40px + 10 * ((100vw - 768px) / (1200 - 768)));
+      }
+
+      @media (max-width: 768px) {
+        position: absolute;
+        z-index: 100; 
+        top: calc(200px + 120 * ((100vw - 420px) / (768 - 420)) + $headerHeight);
+        left: 110vw;
+        transition: .3s 0s;
+      }
+
+      .auth__link {
+        position: relative;
+        top: 24px;
+        display: flex;
+        justify-content: center;  
+        align-items: center;
+        width: 100px;
+        height: 32px;
+        font-size: 16px;
+        border-radius: 20px;
+        text-align: center;
+
+        @media (max-width: 1200px) {
+          top: calc((25px + 15 * ((100vw - 400px) / (1200 - 400))) - (14px + 2 * ((100vw - 768px) / (1200 - 768))));
+          width: calc(80px + 20 * ((100vw - 768px) / (1200 - 768)));
+          height: calc(28px + 4 * ((100vw - 768px) / (1200 - 768)));
+        }
+
+        @media (max-width: 768px) {
+          top: calc(70px - 60 * ((100vw - 420px) / (768 - 420)));
+          width: calc(150px + 50 * ((100vw - 420px) / (768 - 420)));
+          height: calc(32px + 10 * ((100vw - 420px) / (768 - 420)));
+          left: calc(42% + 50 * ((100vw - 420px) / (768 - 420)));
+          transform: translateX(-50%);
+        }
+
+        &:hover .auth__waves {
+          top: 200px;
+
+          @media (max-width: 1200px) {
+            top: calc((180px + 20 * ((100vw - 768px) / (1200 - 768))));
+          }
+
+          @media (max-width: 768px) {
+            top: calc((340px + 90 * ((100vw - 420px) / (768 - 420))));
+          }
+
+        }
+
+        .auth__waves {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          top: 260px;
+          left: 0;
+          transition: all 0.8s cubic-bezier(0.68,-0.55,0.265,1.55) 0s;
+
+          @media (max-width: 1200px) {
+            top: calc((210px + 50 * ((100vw - 768px) / (1200 - 768))));
+            width: calc(80px + 20 * ((100vw - 768px) / (1200 - 768)));
+            height: calc(80px + 20 * ((100vw - 768px) / (1200 - 768)));
+          }
+
+          @media (max-width: 768px) {
+            top: calc((380px + 130 * ((100vw - 420px) / (768 - 420))));
+            width: calc(150px + 50 * ((100vw - 420px) / (768 - 420)));
+            height: calc(150px + 50 * ((100vw - 420px) / (768 - 420)));
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  .header-active {
+
+    .nav {
+      right: 0px;
+    }
+
+    .auth {
+      left: 30px;
+    }
+
+  }
+
+}
