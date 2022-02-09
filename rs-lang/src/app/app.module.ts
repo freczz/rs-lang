@@ -1,33 +1,35 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import AppRoutingModule from './app-routing.module';
-import AppComponent from './app.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-
-const appRoutes: AppRoutingModule =[
-    { path: '', component: MainPageComponent},
-];
-
-import { RSLState } from './store/rsl.state';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import environment from 'src/environments/environment';
 
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { Routes, RouterModule } from '@angular/router';
+
+import AppRoutingModule from './app-routing.module';
+import AppComponent from './app.component';
+import MainPageComponent from './components/main-page/main-page.component';
+import HeaderComponent from './components/header/header.component';
+import FooterComponent from './components/footer/footer.component';
+
+import { RSLState } from './store/rsl.state';
+
+const appRoutes: Routes = [
+  { path: '', component: MainPageComponent },
+  { path: '**', redirectTo: '/' },
+];
+
 @NgModule({
-<<<<<<< HEAD
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule,
+  declarations: [AppComponent, MainPageComponent, HeaderComponent, FooterComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule.forRoot(appRoutes),
     NgxsModule.forRoot([RSLState], {
       developmentMode: !environment.production,
     }),
-    NgxsReduxDevtoolsPluginModule.forRoot(),],
-=======
-  declarations: [AppComponent, MainPageComponent, HeaderComponent, FooterComponent],
-  imports: [BrowserModule, AppRoutingModule],
->>>>>>> fbcd45a (feat: add main page)
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

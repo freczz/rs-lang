@@ -1,7 +1,7 @@
 <header class="header">
   <div class="container">
     <div [class.header__body]="true" [class.header-active]="isActive">
-      <a href="/" class="header__logo">
+      <a routerLink="/" routerLinkActive="active-link" class="header__logo">
         <img class="header__logo__main" src="assets/svg/logo.svg" alt="Logo">
         <img class="header__logo__side" src="assets/svg/logo2hover.svg" alt="Logo2">
       </a>
@@ -13,16 +13,15 @@
       </div>
       <nav #nav class="header__nav nav" [ngStyle]="{'background-image': 'url(./assets/svg/map.svg)'}">
         <ul class="nav__list">
-          <li class="nav__item"><a class="nav__link" href="/">Учебник</a></li>
-          <li class="nav__item"><a class="nav__link" href="/">Спринт</a></li>
-          <li class="nav__item"><a class="nav__link" href="/">Аудиовызов</a></li>
-          <li class="nav__item"><a class="nav__link" href="/">Статистика</a></li>
+          <li class="nav__item" *ngFor="let item of links">
+            <a class="nav__link" routerLink="{{item.url}}" routerLinkActive="active-link">{{item.content}}</a>
+          </li>
         </ul>
       </nav>
-      <div class="header__auth auth">
-        <a #auth class="auth__link btn" href="/">
-          <span class="auth__text">Вход</span>
-          <span class="auth__waves"></span>
+      <div class="header__login login">
+        <a class="login__link btn" routerLink="/auth">
+          <span class="login__text">Вход</span>
+          <span class="login__waves"></span>
         </a>
       </div>
     </div>

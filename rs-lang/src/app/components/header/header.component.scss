@@ -16,6 +16,79 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
     height: $headerHeight;
   }
 
+  .container {
+    max-width: 1200px;
+    padding: 0px 15px;
+    margin: 0 auto;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      overflow: visible;
+    }
+  }
+
+  .btn {
+    background: transparent;
+    border: 2px solid #9e3af3;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+    border-radius: 20px;
+    font-weight: 600;
+
+    &:hover {
+      border-radius: 20px;
+      transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s;
+      box-shadow: 0 0 10px rgba(158, 58, 243, 0.6);
+    }
+
+    span:first-child {
+      position: relative;
+      z-index: 1;
+    }
+
+    span:last-child {
+      position: absolute;
+      left: 0;
+      transition: all 0.8s cubic-bezier(0.68,-0.55,0.265,1.55) 0s;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 250%;
+        height: 250%;
+        z-index: 4;
+        transform: translate3d(-50%, -96%, 0) rotate(0) scale(1);
+      }
+
+      &:before {
+        background-color: rgba(179,107,243, 0.3);
+        border-radius: 48%;
+        animation: waves 5s infinite linear;
+      }
+
+      &:after {
+        background-color: rgba(158, 58, 243, 0.1);
+        border-radius: 42%;
+        animation: waves 10s infinite linear;
+      }
+    }
+
+    @keyframes waves {
+      0% {
+        transform: translate3d(-50%, -96%, 0) rotate(0) scale(1);
+      }
+
+      100% {
+        transform: translate3d(-50%, -96%, 0) rotate(360deg) scale(1);
+      }
+    }
+  }
+
   .header__body {
     line-height: 80px;
     position: relative;
@@ -44,7 +117,6 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
         @media (max-width: 1200px) {
           height: calc(40px + 30 * ((100vw - 400px) / (1200 - 400)));
         }
-
       }
 
       .header__logo__main {
@@ -53,17 +125,14 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
         &:hover {
           opacity: 0;
         }
-
       }
 
       .header__logo__side {
         z-index: 11;
       }
-
     }
 
     .menu {
-
       #menu__toggle {
         position: absolute;
         opacity: 0;
@@ -86,7 +155,6 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
           opacity: 1;
           z-index: 1000;
         }
-
       }
 
       .menu__btn > span,
@@ -113,15 +181,16 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
       #menu__toggle:checked ~ .menu__btn > span {
         transform: rotate(45deg);
       }
+
       #menu__toggle:checked ~ .menu__btn > span::before {
         top: 0;
         transform: rotate(0);
       }
+
       #menu__toggle:checked ~ .menu__btn > span::after {
         top: 0;
         transform: rotate(90deg);
       }
-
     }
 
     .nav {
@@ -153,7 +222,6 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
           position: relative;
           flex-direction: column;
         }
-      
       }
 
       .nav__item {
@@ -190,7 +258,6 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
               bottom: 50%;
               left: 0;
             }
-
           }
 
           &::before {
@@ -205,7 +272,6 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
               bottom: 50%;
               right: 0;
             }
-
           }
 
           &:hover {
@@ -219,26 +285,35 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
               @media (max-width: 768px) {
                 width: 35%;
               }
-
             }
 
             &:before {
-
               @media (max-width: 768px) {
                 width: 35%;
               }
-
             }
-
           }
-          
         }
 
-      }
+        .active-link {
+          text-shadow: 0 0 2px #9e3af3;
+          position: relative;
 
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background: #9e3af3;
+            box-shadow: 0 0 2px #9e3af3;
+          }
+        }
+      }
     }
 
-    .auth {
+    .login {
       flex: 0 0 25%;
       position: absolute;
       right: calc(12.5% - 50px);
@@ -255,8 +330,10 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
         transition: .3s 0s;
       }
 
-      .auth__link {
+      .login__link {
         position: relative;
+        color: #716dab;
+        text-shadow: 0px 0px 1px #9e3af3;
         top: 24px;
         display: flex;
         justify-content: center;  
@@ -281,7 +358,11 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
           transform: translateX(-50%);
         }
 
-        &:hover .auth__waves {
+        &:hover {
+          color: #000;
+        }
+
+        &:hover .login__waves {
           top: 200px;
 
           @media (max-width: 1200px) {
@@ -291,10 +372,9 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
           @media (max-width: 768px) {
             top: calc((340px + 90 * ((100vw - 420px) / (768 - 420))));
           }
-
         }
 
-        .auth__waves {
+        .login__waves {
           position: absolute;
           width: 100px;
           height: 100px;
@@ -313,25 +393,18 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
             width: calc(150px + 50 * ((100vw - 420px) / (768 - 420)));
             height: calc(150px + 50 * ((100vw - 420px) / (768 - 420)));
           }
-
         }
-
       }
-
     }
-
   }
 
   .header-active {
-
     .nav {
       right: 0px;
     }
 
-    .auth {
+    .login {
       left: 30px;
     }
-
   }
-
 }

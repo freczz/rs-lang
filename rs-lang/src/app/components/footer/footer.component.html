@@ -1,0 +1,15 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__body">
+      <a class="footer__school" href="https://rs.school/js/" target="_blank">
+        <img src="assets/svg/rs_school_js.svg" alt="RS School" draggable="false">
+      </a>
+      <ul class="footer__team">
+        <li class="footer__member" *ngFor="let item of contacts">
+          <a href="https://github.com/{{item.githubLink}}" target="_blank">{{item.firstName}} {{item.secondName}}</a>
+        </li>
+      </ul>
+      <p class="footer__year">© 2022</p>
+    </div>
+  </div>
+</footer>
