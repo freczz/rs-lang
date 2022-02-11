@@ -1,0 +1,238 @@
+.audiocall-container, .switch-level-popup {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 50px;
+  font-size: 28px;
+  color: white;
+}
+
+.background {
+  position: absolute;
+  background-image: url('../../assets/jpg/mor.jpg');
+  filter: blur(7px);
+  width: 100%;
+  height: 100vh;
+}
+
+.switch-level-popup {
+  display: flex
+}
+
+.volume-img {
+  width: 120px;
+  height: 120px;
+  background: url('../../assets/svg/volume.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.volume-img:hover,
+.next-or-know:hover,
+.fullscreen-button:hover,
+.answer:hover,
+.outplay-button:hover,
+.on-main-button:hover,
+.volume-answer:hover,
+.circle:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.answers-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  justify-content: space-around;
+  row-gap: 50px;
+}
+
+.next-or-know {
+  width: 180px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  background-color: #666699;
+  color: white;
+}
+
+.fullscreen-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.circles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  color: #FFF;
+  flex-wrap: wrap;
+}
+
+.circle {
+  background: #666699;
+  padding: 15px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.level-title {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.answer { 
+  color: white;
+}
+.true-answer-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 30px;
+  color: #666699;
+  font-weight: bold;
+}
+
+.result-popup {
+  width: 100%;
+  background-color: white;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-container {
+  background-color: white;
+  background-image: url(../../assets/jpg/kwk.jpg);
+  background-size: 35%;
+  background-position: right;
+  background-repeat: no-repeat;
+  width: 53%;
+  opacity: 1;
+  height: 600px;
+  border-radius: 25px;
+  position: absolute;
+  display: flex;
+  box-shadow: 4px 4px 4px 4px black;
+  overflow-y: auto;
+}
+
+.mistakes,
+.words-know {
+  padding: 50px;
+  font-size: 38px;
+}
+
+.result-answer {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  font-size: 32px;
+}
+
+.volume-answer {
+  background: url(../../assets/svg/volume.svg);
+  width: 35px;
+  height: 35px;
+}
+
+.result-title {
+  padding-bottom: 30px;
+}
+
+.outplay-button,
+.on-main-button {
+  width: 150px;
+  height: 35px;
+  margin : 10px;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  background: #0c6bdf;
+}
+
+.answer-eng, .result-title {
+  color: #5a95dd;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.result-container::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f9f9fd;
+  border-radius: 25px;
+}
+
+.result-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #5a95dd;
+}
+
+.boat {
+  min-width: 250px;
+  height: 45px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  background:#006359;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cabin {
+  position: relative;
+  top: -35px;
+  left: 40px;
+  width: 70px;
+  height: 35px;
+  border-radius: 25%;
+  background: #018174;
+}
+
+.answer {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.green {
+  background-color: green;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.red {
+  background-color: red;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}

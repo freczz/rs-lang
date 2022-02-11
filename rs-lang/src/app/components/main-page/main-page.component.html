@@ -1,0 +1,96 @@
+<main>
+  <section class="greeting">
+    <div class="container">
+      <div class="greeting__body">
+        <div class="greeting__left">
+          <h1 class="greeting__title">RS Lang</h1>
+          <p class="greeting__text">Мир не стоит на месте. Необходимость в знании английского языка растёт с каждым днем. Ты тоже не стой на месте! Учи английский вместе с RS Lang!</p>
+          <div class="greeting__more more">
+            <a class="more__btn btn" routerLink="/">
+              <span class="more__text">Узнать больше</span>
+              <span class="more__waves"></span>
+            </a>
+          </div>
+        </div>
+        <div class="greeting__right">
+          <img src="assets/svg/welcoming.svg" alt="Greeting" draggable="false">
+        </div>
+      </div>
+    </div>
+  </section>
+  <img src="assets/svg/firstWave.svg" alt="First Wave" draggable="false">
+  <section class="opportunities">
+    <div class="container">
+      <h2 class="opportunities__title">Возможности</h2>
+      <div class="opportunities__items">
+        <div class="opportunities__item opportunities__item_right">
+          <div class="opportunities__item__img">
+            <img src="assets/svg/reading.svg" alt="Reading">
+          </div>
+          <div class="opportunities__item__content">
+            <div class="opportunities__item__content__title">
+              <img src="assets/svg/reading-logo.svg" alt="Textbook logo">
+              <h3>Учебник</h3>
+            </div>
+            <p class="opportunities__item__content__text">Более 3500 простых, а также не очень, слов собраны в одном месте, разделённом на 6 разделов в зависимости от уровня подготовки с удобной навигацией.</p>
+            <a class="opportunities__item__content__btn btn" routerLink="/">
+              <span class="opportunities__item__content__btn__text">Перейти</span>
+              <span class="opportunities__item__content__btn__waves"></span>
+            </a>
+          </div>
+        </div>
+        <div class="opportunities__item opportunities__item_left">
+          <div class="opportunities__item__content">
+            <div class="opportunities__item__content__title">
+              <img src="assets/svg/games-logo.svg" alt="Games logo">
+              <h3>Игры</h3>
+            </div>
+            <p class="opportunities__item__content__text">Имеются 2 увлекательные игры на развитие запоминания слов (игра "Спринт") и восприятия слов на слух (игра "Аудиовызов").</p>
+            <a class="opportunities__item__content__btn btn" routerLink="/">
+              <span class="opportunities__item__content__btn__text">Перейти</span>
+              <span class="opportunities__item__content__btn__waves"></span>
+            </a>
+          </div>
+          <div class="opportunities__item__img">
+            <img src="assets/svg/games.svg" alt="Games">
+          </div>
+        </div>
+        <div class="opportunities__item opportunities__item_right">
+          <div class="opportunities__item__img">
+            <img src="assets/svg/statistics.svg" alt="Statistics">
+          </div>
+          <div class="opportunities__item__content">
+            <div class="opportunities__item__content__title">
+              <img src="assets/svg/statistics-logo.svg" alt="Statistics logo">
+              <h3>Статистика</h3>
+            </div>
+            <p class="opportunities__item__content__text">Весь прогресс обучения в одном месте. Представлены данные как за текущий день, так и за весь период, как в виде таблицы, так и в виде графиков. Очень удобно!</p>
+            <a class="opportunities__item__content__btn btn" routerLink="/">
+              <span class="opportunities__item__content__btn__text">Перейти</span>
+              <span class="opportunities__item__content__btn__waves"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <img src="assets/svg/secondWave.svg" alt="Second Wave" draggable="false">
+  <section class="team">
+    <div class="container">
+      <h2 class="team__title">О команде разработчиков</h2>
+      <div class="team__body">
+        <div class="team__member member" *ngFor="let member of team">
+          <div class="member__img">
+            <img src="assets/images/{{member.imgLink}}.jpg" alt="{{member.imgLink}}" draggable="false">
+          </div>
+          <h3 class="member__name">{{member.firstName}}</h3>
+          <a class="member__github" href="https://github.com/{{member.githubLink}}">{{member.githubLink}}</a>
+          <p class="member__status">{{member.status}}</p>
+          <ul class="member__tasks">
+            <li class="member__task" *ngFor="let task of member.tasks; let i = index">{{i + 1}}. {{task}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
