@@ -33,4 +33,5 @@ export interface IAudiocallGameComponent {
   showResult(): void;
   playAuidoInResult(event: MouseEvent): void;
   resetResult(): void;
+  checkIdenticalAnswers(): void;
 }

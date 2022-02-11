@@ -8,7 +8,7 @@ import { randomNumberByInterval } from '../utilities/utils';
   templateUrl: './audiocall-game.component.html',
   styleUrls: ['./audiocall-game.component.scss'],
 })
-export class AudiocallGameComponent implements IAudiocallGameComponent {
+export default class AudiocallGameComponent implements IAudiocallGameComponent {
   fullscreenBackground: string = 'url(../../assets/svg/fullscreen.svg) center / contain no-repeat';
 
   @ViewChild('audiocallContainer', { static: false }) audiocallContainer!: ElementRef;
@@ -75,6 +75,8 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
 
   visibleResult = false;
 
+  buttonDisabled = false;
+
   switchFullscreen(): void {
     if (!this.fullscreenBackground.match('exit')) {
       this.fullscreenBackground = 'url(../../assets/svg/exitfullscreen.svg) center / contain no-repeat';
@@ -98,15 +100,16 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
     for (let i = 0; i < countAnswer; i++) {
       const page: number = randomNumberByInterval(0, 29);
       const wordNumber: number = randomNumberByInterval(0, 19);
-      const rawResponse = fetch(`${serverLink}words?page=${page}&group=${this.lvlNumber}`, {
+      const rawResponse = await fetch(`${serverLink}words?page=${page}&group=${this.lvlNumber}`, {
         method: 'GET',
       });
-      const words = await (await rawResponse).json();
+      const words = await rawResponse.json();
       this.imgsOfTrueAnswers.push(words[wordNumber].image);
       this.wordsEng.push(words[wordNumber].word);
       this.wordsRu.push(words[wordNumber].wordTranslate);
       this.audios.push(words[wordNumber].audio);
     }
+    this.checkIdenticalAnswers();
     this.generateAudio();
   }
 
@@ -133,10 +136,12 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
   }
 
   receiveAnswer(answerNumber: string, event?: MouseEvent): void {
-    let answerText: string | null;
+    this.buttonDisabled = true;
+    let answerText: string | null | undefined;
     if (answerNumber) {
-      answerText = ((this.answersContainer.nativeElement as Node).childNodes[+answerNumber!] as HTMLElement)
-        .textContent;
+      answerText = (
+        (this.answersContainer.nativeElement as Node).childNodes[+answerNumber! - 1] as HTMLElement
+      ).textContent?.slice(1);
     } else {
       answerText = (event!.target as HTMLElement).textContent;
     }
@@ -163,14 +168,13 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
 
   showTrueAnswer(): void {
     this.nextOrKnow = 'Далее';
-    this.trueAnswerImage = `url(${serverLink}${
-      this.imgsOfTrueAnswers![this.trueAnswerNumber!]
-    }) center`;
+    this.trueAnswerImage = `url(${serverLink}${this.imgsOfTrueAnswers![this.trueAnswerNumber!]}) center`;
     this.answerText = `${this.wordsEng![this.trueAnswerNumber!]}`;
     this.visibleCardContainer = true;
   }
 
   showNextQuestion(): void {
+    this.buttonDisabled = false;
     if (this.nextOrKnow === 'Не знаю') {
       if (this.raundCount === this.numberRaund) {
         this.showResult();
@@ -209,11 +213,21 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
   }
 
   resetResult(): void {
-    this.numberRaund;
+    this.numberRaund = 0;
     this.visibleResult = false;
     this.visibleSwitchLevel = true;
     this.wordsWin = [[], []];
     this.wordsLose = [[], []];
     this.winsAudios = [];
+  }
+
+  checkIdenticalAnswers(): void {
+    const similars = this.wordsRu!.filter((el: string, i: number, arr: string[]) => arr.indexOf(el) !== i).map((el) => [
+      el,
+      el,
+    ]);
+    if (similars.length) {
+      this.generaneAnswers(5);
+    }
   }
 }

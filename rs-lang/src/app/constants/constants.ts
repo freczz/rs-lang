@@ -1,1 +1,1 @@
-export const serverLink = "https://react-learnwords-example.herokuapp.com/";
+export const serverLink = 'https://react-learnwords-example.herokuapp.com/';

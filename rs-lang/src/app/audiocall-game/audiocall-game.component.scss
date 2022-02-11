@@ -97,7 +97,9 @@
   font-weight: bold;
 }
 
-.answer {  color: white;}
+.answer { 
+  color: white;
+}
 .true-answer-img {
   width: 250px;
   height: 250px;
@@ -219,6 +221,8 @@
 .answer {
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
+  border: none;
+  background-color: transparent;
 }
 
 .green {

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AudiocallGameComponent } from './audiocall-game.component';
+import AudiocallGameComponent from './audiocall-game.component';
 
 describe('AudiocallGameComponent', () => {
   let component: AudiocallGameComponent;

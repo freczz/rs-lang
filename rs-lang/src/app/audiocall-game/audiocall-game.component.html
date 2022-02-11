@@ -16,7 +16,7 @@
   <div class="answers-container" #answersContainer>
     <div class="boat" [ngClass]="{ red: red }" *ngFor="let item of wordsRu; index as i">
       <div class="cabin">{{ i + 1 }}</div>
-      <p class="answer" (click)="receiveAnswer('', $event)">{{ item }}</p>
+      <button class="answer" [disabled]="buttonDisabled" (click)="receiveAnswer('', $event)">{{ item }}</button>
     </div>
   </div>
   <div [style.background]="fullscreenBackground" (click)="switchFullscreen()" class="fullscreen-button"></div>
