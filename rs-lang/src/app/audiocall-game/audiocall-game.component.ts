@@ -1,11 +1,14 @@
 import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { serverLink } from '../constants/constants';
+import { IAudiocallGameComponent } from '../interfaces/interfaces';
+import { randomNumberByInterval } from '../utilities/utils';
 
 @Component({
   selector: 'app-audiocall-game',
   templateUrl: './audiocall-game.component.html',
   styleUrls: ['./audiocall-game.component.scss'],
 })
-export class AudiocallGameComponent {
+export class AudiocallGameComponent implements IAudiocallGameComponent {
   fullscreenBackground: string = 'url(../../assets/svg/fullscreen.svg) center / contain no-repeat';
 
   @ViewChild('audiocallContainer', { static: false }) audiocallContainer!: ElementRef;
@@ -90,7 +93,7 @@ export class AudiocallGameComponent {
     }
   }
 
-  async generaneAnswers(countAnswer: number) {
+  async generaneAnswers(countAnswer: number): Promise<void> {
     this.visibleCardContainer = false;
     this.wordsRu = [];
     this.audios = [];
@@ -103,12 +106,9 @@ export class AudiocallGameComponent {
     for (let i = 0; i < countAnswer; i++) {
       const page: number = randomNumberByInterval(0, 29);
       const wordNumber: number = randomNumberByInterval(0, 19);
-      const rawResponse = fetch(
-        `https://react-learnwords-example.herokuapp.com/words?page=${page}&group=${this.lvlNumber}`,
-        {
-          method: 'GET',
-        }
-      );
+      const rawResponse = fetch(`${serverLink}words?page=${page}&group=${this.lvlNumber}`, {
+        method: 'GET',
+      });
       const words = await (await rawResponse).json();
       this.imgs.push(words[wordNumber].image);
       this.wordsEng.push(words[wordNumber].word);
@@ -120,11 +120,11 @@ export class AudiocallGameComponent {
 
   generateAudio(): void {
     this.trueAnswerNumber = randomNumberByInterval(0, 4);
-    this.audio = new Audio(`https://react-learnwords-example.herokuapp.com/${this.audios![this.trueAnswerNumber]}`);
+    this.audio = new Audio(`${serverLink}${this.audios![this.trueAnswerNumber]}`);
     this.audio.play();
   }
 
-  switchLevel(event: MouseEvent) {
+  switchLevel(event: MouseEvent): void {
     const countAnswer = 5;
     this.lvlNumber = `${(event.target as HTMLElement).textContent}`;
     if (this.visibleSwitchLevel) {
@@ -171,7 +171,7 @@ export class AudiocallGameComponent {
 
   showTrueAnswer(): void {
     this.nextOrKnow = 'Далее';
-    this.trueAnswerImage = `url(https://react-learnwords-example.herokuapp.com/${
+    this.trueAnswerImage = `url(${serverLink}${
       this.imgs![this.trueAnswerNumber!]
     }) center`;
     this.answerText = `${this.wordsEng![this.trueAnswerNumber!]}`;
@@ -199,19 +199,19 @@ export class AudiocallGameComponent {
     }
   }
 
-  showResult() {
+  showResult(): void {
     this.visibleResult = true;
   }
 
-  playAuidoInResult(event: MouseEvent) {
+  playAuidoInResult(event: MouseEvent): void {
     const audioAttr: string | null = (event.target as HTMLElement).getAttribute('data-number');
     const winOrLose = audioAttr!.split(' ').slice(1, 2).join('');
     const audioNumber: number = Number(audioAttr!.slice(0, 1));
     if (winOrLose === 'win') {
-      const audio = new Audio(`https://react-learnwords-example.herokuapp.com/${this.winsAudios![audioNumber]}`);
+      const audio = new Audio(`${serverLink}${this.winsAudios![audioNumber]}`);
       audio.play();
     } else {
-      const audio = new Audio(`https://react-learnwords-example.herokuapp.com/${this.loseAudios![audioNumber]}`);
+      const audio = new Audio(`${serverLink}${this.loseAudios![audioNumber]}`);
       audio.play();
     }
   }
@@ -224,8 +224,4 @@ export class AudiocallGameComponent {
     this.wordsLose = [[], []];
     this.winsAudios = [];
   }
-}
-function randomNumberByInterval(min: number, max: number): number {
-  const rand: number = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
 }
