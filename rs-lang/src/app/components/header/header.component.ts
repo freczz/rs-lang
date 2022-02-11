@@ -19,7 +19,7 @@ export default class HeaderComponent {
       content: 'Спринт',
     },
     {
-      url: '/',
+      url: '/audiocall',
       content: 'Аудиовызов',
     },
     {

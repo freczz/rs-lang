@@ -4,7 +4,6 @@ import environment from 'src/environments/environment';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
 
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
@@ -15,17 +14,12 @@ import AudiocallGameComponent from './components/audiocall-game/audiocall-game.c
 
 import { RSLState } from './store/rsl.state';
 
-const appRoutes: Routes = [
-  { path: '', component: MainPageComponent },
-  { path: '**', redirectTo: '/' },
-];
 
 @NgModule({
   declarations: [AppComponent, MainPageComponent, HeaderComponent, FooterComponent, AudiocallGameComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes),
     NgxsModule.forRoot([RSLState], {
       developmentMode: !environment.production,
     }),
