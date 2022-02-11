@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
-import { AudioGameComponent } from './audio-game/audio-game.component';
+import { AudiocallGameComponent } from './audiocall-game/audiocall-game.component';
 
 @NgModule({
-  declarations: [AppComponent, AudioGameComponent],
+  declarations: [AppComponent, AudiocallGameComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
