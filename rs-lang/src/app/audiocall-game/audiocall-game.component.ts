@@ -17,8 +17,6 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
 
   @ViewChild('answersContainer', { static: false }) answersContainer!: ElementRef;
 
-  key: string | undefined;
-
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     const { key } = event;
@@ -36,10 +34,6 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
   numberRaund: number = 0;
 
   trueAnswerCount = 0;
-
-  loseWordsRu: string[] = [];
-
-  loseWordsEng: string[] = [];
 
   loseAudios: string[] = [];
 
@@ -63,8 +57,6 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
 
   trueAnswerNumber: number | undefined;
 
-  answersColors = 'white';
-
   red = false;
 
   trueAnswerImage = '';
@@ -77,7 +69,7 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
 
   wordsLose: string[][] = [[], []];
 
-  imgs: string[] | undefined;
+  imgsOfTrueAnswers: string[] | undefined;
 
   nextOrKnow: string = 'Не знаю';
 
@@ -98,7 +90,7 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
     this.wordsRu = [];
     this.audios = [];
     this.wordsEng = [];
-    this.imgs = [];
+    this.imgsOfTrueAnswers = [];
     this.numberRaund++;
     if (this.raundCount === this.numberRaund) {
       this.showResult();
@@ -110,7 +102,7 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
         method: 'GET',
       });
       const words = await (await rawResponse).json();
-      this.imgs.push(words[wordNumber].image);
+      this.imgsOfTrueAnswers.push(words[wordNumber].image);
       this.wordsEng.push(words[wordNumber].word);
       this.wordsRu.push(words[wordNumber].wordTranslate);
       this.audios.push(words[wordNumber].audio);
@@ -172,7 +164,7 @@ export class AudiocallGameComponent implements IAudiocallGameComponent {
   showTrueAnswer(): void {
     this.nextOrKnow = 'Далее';
     this.trueAnswerImage = `url(${serverLink}${
-      this.imgs![this.trueAnswerNumber!]
+      this.imgsOfTrueAnswers![this.trueAnswerNumber!]
     }) center`;
     this.answerText = `${this.wordsEng![this.trueAnswerNumber!]}`;
     this.visibleCardContainer = true;

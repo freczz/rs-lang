@@ -2,8 +2,6 @@ export interface IAudiocallGameComponent {
   raundCount: number;
   numberRaund: number;
   trueAnswerCount: number;
-  loseWordsRu: string[];
-  loseWordsEng: string[];
   loseAudios: string[];
   wordsRu: string[] | undefined;
   wordsEng: string[] | undefined;
@@ -15,14 +13,13 @@ export interface IAudiocallGameComponent {
   lvlNumber: string;
   audio: HTMLAudioElement | undefined;
   trueAnswerNumber: number | undefined;
-  answersColors: string;
   red: boolean;
   trueAnswerImage: string;
   answerText: string;
   winsAudios: string[];
   wordsWin: string[][];
   wordsLose: string[][];
-  imgs: string[] | undefined;
+  imgsOfTrueAnswers: string[] | undefined;
   nextOrKnow: string;
   visibleResult: boolean;
   switchFullscreen(): void;
