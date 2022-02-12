@@ -1,0 +1,17 @@
+<div class="wrapper-sprint" #sprint>
+  <div class="sprint-state">
+    <app-start (checkLevel)="checkLevel($event)" *ngIf="!condition"></app-start>
+    <app-round [wordsLevel]="level" *ngIf="condition" [isVolumeOn]="isVolume"></app-round>
+  </div>
+  <div class="sprint-controls">
+    <a class="closed" routerLink="">
+      <span class="close-icon"></span>
+    </a>
+    <div class="fullscreen" (click)="switchFullscreen()" #fullscreen>
+      <span class="fullscreen-icon"></span>
+    </div>
+    <div class="sound" (click)="switchVolume()" #volume>
+      <span class="volume-icon"></span>
+    </div>
+  </div>
+</div>

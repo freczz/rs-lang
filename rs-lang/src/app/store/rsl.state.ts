@@ -1,38 +1,38 @@
-import { IState } from "./rsl.interface";
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { SetPrevVisitedPage, SetToken } from "./rsl.action";
+import { IState } from './rsl.interface';
+import { SetPrevVisitedPage, SetToken, SetTextbookPage } from './rsl.action';
 
 const initialState: IState = {
   token: '',
-  prevVisitedPage: ''
+  prevVisitedPage: '',
+  textbookPage: '0',
 };
 
 @State<IState>({
   name: 'RSLState',
-  defaults: initialState
+  defaults: initialState,
 })
 @Injectable()
-export class RSLState {
-  constructor() {}
-
+class RSLState {
   @Action(SetPrevVisitedPage)
-  setPrevVisitedPage(
-    { patchState }: StateContext<IState>,
-    action: SetPrevVisitedPage
-  ) {
+  setPrevVisitedPage({ patchState }: StateContext<IState>, action: SetPrevVisitedPage) {
     patchState({
-      prevVisitedPage: action.prevVisitedPage
+      prevVisitedPage: action.prevVisitedPage,
     });
   }
 
   @Action(SetToken)
-  setToken(
-    { patchState }: StateContext<IState>,
-    action: SetToken
-  ) {
+  setToken({ patchState }: StateContext<IState>, action: SetToken) {
     patchState({
-      token: action.token
+      token: action.token,
+    });
+  }
+
+  @Action(SetToken)
+  setTextbookPage({ patchState }: StateContext<IState>, action: SetTextbookPage) {
+    patchState({
+      textbookPage: action.textbookPage,
     });
   }
 
@@ -45,4 +45,11 @@ export class RSLState {
   public static token(state: IState): string {
     return state.token;
   }
+
+  @Selector()
+  public static textbookPage(state: IState): string {
+    return state.textbookPage;
+  }
 }
+
+export default RSLState;

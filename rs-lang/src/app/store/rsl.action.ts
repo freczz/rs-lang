@@ -9,3 +9,9 @@ export class SetToken {
 
   constructor(public token: string) {}
 }
+
+export class SetTextbookPage {
+  static readonly type = '[RSL] Set textbook page';
+
+  constructor(public textbookPage: string) {}
+}

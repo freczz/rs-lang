@@ -1,0 +1,14 @@
+<div class="sprint">
+  <h2>Спринт</h2>
+  <p class="description">Спринт - тренировка на скорость.</p>
+  <div *ngIf="isDefaultStart">
+    <p>Выбери уровень:</p>
+    <div class="level" (click)="chooseLevel($event)" #levelBtns>
+      <div *ngFor="let level of listLevels; let i = index" id={{i}} class="btn">{{level}}</div>
+    </div>
+  </div>
+  <div *ngIf="!isDefaultStart">
+    <p>Игра начнется с текущими словами из словаря, удачи!</p>
+  </div>
+  <app-button [isActive]="disable" text="Начать" (click)="change(true)" color="white"></app-button>
+</div>
