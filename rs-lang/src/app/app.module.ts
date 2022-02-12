@@ -14,7 +14,6 @@ import AudiocallGameComponent from './components/audiocall-game/audiocall-game.c
 
 import { RSLState } from './store/rsl.state';
 
-
 @NgModule({
   declarations: [AppComponent, MainPageComponent, HeaderComponent, FooterComponent, AudiocallGameComponent],
   imports: [

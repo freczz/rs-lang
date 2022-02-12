@@ -4,9 +4,9 @@ import MainPageComponent from './components/main-page/main-page.component';
 import AudiocallGameComponent from './components/audiocall-game/audiocall-game.component';
 
 const routes: Routes = [
-{ path: '', component: MainPageComponent },
-// { path: '**', redirectTo: '/' },
-{ path: 'audiocall', component: AudiocallGameComponent}
+  { path: '', component: MainPageComponent },
+  // { path: '**', redirectTo: '/' },
+  { path: 'audiocall', component: AudiocallGameComponent },
 ];
 
 @NgModule({

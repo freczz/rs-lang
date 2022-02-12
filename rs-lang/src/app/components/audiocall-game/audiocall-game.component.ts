@@ -214,6 +214,7 @@ export default class AudiocallGameComponent implements IAudiocallGameComponent {
 
   resetResult(): void {
     this.numberRaund = 0;
+    this.visibleAudiocallGame = false;
     this.visibleResult = false;
     this.visibleSwitchLevel = true;
     this.wordsWin = [[], []];

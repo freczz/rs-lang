@@ -1,38 +1,32 @@
-import { IState } from "./rsl.interface";
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { SetPrevVisitedPage, SetToken } from "./rsl.action";
+import { IState } from './rsl.interface';
+import { SetPrevVisitedPage, SetToken } from './rsl.action';
 
 const initialState: IState = {
   token: '',
-  prevVisitedPage: ''
+  prevVisitedPage: '',
 };
 
 @State<IState>({
   name: 'RSLState',
-  defaults: initialState
+  defaults: initialState,
 })
 @Injectable()
 export class RSLState {
   constructor() {}
 
   @Action(SetPrevVisitedPage)
-  setPrevVisitedPage(
-    { patchState }: StateContext<IState>,
-    action: SetPrevVisitedPage
-  ) {
+  setPrevVisitedPage({ patchState }: StateContext<IState>, action: SetPrevVisitedPage) {
     patchState({
-      prevVisitedPage: action.prevVisitedPage
+      prevVisitedPage: action.prevVisitedPage,
     });
   }
 
   @Action(SetToken)
-  setToken(
-    { patchState }: StateContext<IState>,
-    action: SetToken
-  ) {
+  setToken({ patchState }: StateContext<IState>, action: SetToken) {
     patchState({
-      token: action.token
+      token: action.token,
     });
   }
 

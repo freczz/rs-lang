@@ -1,4 +1,5 @@
 import { ITeam } from '../interfaces/interfaces';
+
 export const serverLink = 'https://angular-rslang.herokuapp.com/';
 
 export const team: ITeam[] = [
