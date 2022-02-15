@@ -157,3 +157,24 @@ export interface IWords {
 }
 
 export type Words = IWords[];
+
+export interface IFormData {
+  email: string;
+  password: string;
+  name?: string;
+  confirm?: string;
+}
+
+export interface INewUserData {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface IUserData {
+  token: string;
+  refreshToken: string;
+  userId: string;
+  name?: string;
+  message?: string;
+}
