@@ -13,14 +13,14 @@ class SprintGameComponent {
 
   level: string = '';
 
-  @ViewChild('fullscreen', { static: false })
-  fullscreen: ElementRef | undefined;
+  @ViewChild('fullscreen')
+  fullscreen: ElementRef = { nativeElement: '' };
 
-  @ViewChild('volume', { static: false })
-  volumeIcon: ElementRef | undefined;
+  @ViewChild('volume')
+  volumeIcon: ElementRef = { nativeElement: '' };
 
-  @ViewChild('sprint', { static: false })
-  sprintElement: ElementRef | undefined;
+  @ViewChild('sprint')
+  sprintElement: ElementRef = { nativeElement: '' };
 
   @HostListener('document: fullscreenchange', ['$event'])
   fullScreen(): void {

@@ -15,10 +15,6 @@ class ResultSprintComponent implements OnInit {
 
   @Output() replay = new EventEmitter<boolean>();
 
-  playAgain(increased: boolean): void {
-    this.replay.emit(increased);
-  }
-
   mistake: number = DEFAULT_VALUE;
 
   knows: number = DEFAULT_VALUE;
@@ -36,6 +32,10 @@ class ResultSprintComponent implements OnInit {
     this.audio.src = `${BASE_URL}${url}`;
     this.audio.currentTime = 0;
     this.audio.play();
+  }
+
+  playAgain(increased: boolean): void {
+    this.replay.emit(increased);
   }
 
   moveMainPage(): void {

@@ -1,6 +1,7 @@
 <div class="wrapper-sprint" #sprint>
   <div class="sprint-state">
     <app-start (checkLevel)="checkLevel($event)" *ngIf="!condition"></app-start>
+    <!-- <app-sound [isVol]="isVolume"></app-sound> -->
     <app-round [wordsLevel]="level" *ngIf="condition" [isVolumeOn]="isVolume"></app-round>
   </div>
   <div class="sprint-controls">

@@ -1,14 +1,27 @@
 <div class="sprint">
+  <div class="sprint-bg"></div>
   <h2>Спринт</h2>
-  <p class="description">Спринт - тренировка на скорость.</p>
+  <p class="description">
+    <span>Спринт - тренировка на скорость.</span>
+    <span>Попробуй угадать как можно больше слов за 30 секунд.</span>
+  </p>
   <div *ngIf="isDefaultStart">
     <p>Выбери уровень:</p>
     <div class="level" (click)="chooseLevel($event)" #levelBtns>
-      <div *ngFor="let level of listLevels; let i = index" id={{i}} class="btn">{{level}}</div>
+      <div
+        *ngFor="let level of listLevels; let i = index"
+        id={{i}}
+        class="btn"
+      >{{level}}</div>
     </div>
   </div>
   <div *ngIf="!isDefaultStart">
     <p>Игра начнется с текущими словами из словаря, удачи!</p>
   </div>
-  <app-button [isActive]="disable" text="Начать" (click)="change(true)" color="white"></app-button>
+  <app-button
+    [isActive]="disable"
+    text="Начать"
+    (click)="change(true)"
+    color="#9e3af3"
+  ></app-button>
 </div>

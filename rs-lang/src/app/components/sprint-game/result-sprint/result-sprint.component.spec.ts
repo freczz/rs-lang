@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultSprintComponent } from './result-sprint.component';
+import ResultSprintComponent from './result-sprint.component';
 
 describe('ResultSprintComponent', () => {
   let component: ResultSprintComponent;

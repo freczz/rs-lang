@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SprintGameComponent } from './sprint-game.component';
+import SprintGameComponent from './sprint-game.component';
 
 describe('SprintGameComponent', () => {
   let component: SprintGameComponent;

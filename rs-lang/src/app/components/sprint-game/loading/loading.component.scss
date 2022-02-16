@@ -1,12 +1,17 @@
 .loading {
   width: 100%;
   height: 100vh;
-  background-color:#bdbcf3;
+  background-color:#ffffff;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1000;
+  background-image: url('../../../../assets/svg/undraw_gaming.svg');
+  background-position: right bottom;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
 }
+
 .spinner {
   animation: rotate 2s linear infinite;
   z-index: 2;
@@ -22,7 +27,6 @@
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
-
 }
 
 @keyframes rotate {
@@ -36,10 +40,12 @@
     stroke-dasharray: 1, 150;
     stroke-dashoffset: 0;
   }
+
   50% {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -35;
   }
+
   100% {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -124;

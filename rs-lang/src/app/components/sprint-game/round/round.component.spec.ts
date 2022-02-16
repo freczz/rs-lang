@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoundComponent } from './round.component';
+import RoundComponent from './round.component';
 
 describe('RoundComponent', () => {
   let component: RoundComponent;

@@ -51,3 +51,29 @@ export const enum SoundUrls {
   correctAnswer = './assets/audio/correct-answer.mp3',
   wrongAnswer = './assets/audio/wrong-answer.mp3',
 }
+
+export const enum Difficulty {
+  learned = 'learned',
+  progress = 'progress',
+  hard = 'hard',
+}
+
+export const enum WordStatistic {
+  wins = 0,
+  lose = 1,
+  currentWins = 2,
+  maxWinsLearned = 3,
+  maxWinsHard = 5,
+}
+
+export const enum OptionSettings {
+  newWords,
+  percent,
+  winLine,
+}
+
+export const enum StatesDefault {
+  game = '0-0-0',
+  win = '1-0-1',
+  lose = '0-1-0',
+}

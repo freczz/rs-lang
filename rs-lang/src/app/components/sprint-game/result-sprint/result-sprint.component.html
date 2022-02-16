@@ -1,13 +1,18 @@
 <div class="popup-result">
   <div class="result-wrapper">
     <div class="result-container">
-      <div class="mistakes">Ошибок: <span class="mistakes-count">{{mistake}}</span></div>
+      <h2 class="result-title">Успех!</h2>
+      <div class="mistakes">Ошибок:
+        <span class="mistakes-count">{{mistake}}</span>
+      </div>
       <ul class="wrong-words">
         <li class="wrong-word" *ngFor="let item of wrongWords">
           <span class="volume-icon" (click)="playSound(item.audio)"></span>
           <span>{{item.word}} - {{item.wordTranslate}}</span></li>
       </ul>
-      <div class="knowing">Знаю: <span class="knowing-count">{{knows}}</span></div>
+      <div class="knowing">Знаю:
+        <span class="knowing-count">{{knows}}</span>
+      </div>
       <ul class="correct-words">
         <li class="correct-word" *ngFor="let item of correctWords">
           <span class="volume-icon" (click)="playSound(item.audio)"></span>
@@ -16,8 +21,17 @@
       </ul>
     </div>
     <div class="result-controls">
-      <app-button text="играть снова" color="#9e3af3" bgColor="#eee2e2" (click)="playAgain(false)"></app-button>
-      <app-button text="на главную" color="#9e3af3" bgColor="#eee2e2" (click)="moveMainPage()"></app-button>
+      <app-button
+        text="играть снова"
+        color="#9e3af3"
+        bgColor="#ffffff"
+        (click)="playAgain(false)"
+      ></app-button>
+      <app-button text="на главную"
+        color="#9e3af3"
+        bgColor="#ffffff"
+        (click)="moveMainPage()"
+      ></app-button>
     </div>
   </div>
 </div>

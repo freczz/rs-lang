@@ -19,8 +19,8 @@ class StartComponent implements OnInit {
 
   isDefaultStart: boolean = true;
 
-  @ViewChild('levelBtns', { static: false })
-  levelsBtns: ElementRef | undefined;
+  @ViewChild('levelBtns')
+  levelsBtns: ElementRef = { nativeElement: '' };
 
   @Output() checkLevel = new EventEmitter<LevelGame>();
 

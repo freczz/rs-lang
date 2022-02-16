@@ -1,6 +1,11 @@
 <div class="round">
   <app-loading *ngIf="isLoading"></app-loading>
-  <app-result-sprint [correctWords]="correctWords" [wrongWords]="unCorrectWords" *ngIf="isFinish" (replay)="replay($event)"></app-result-sprint>
+  <app-result-sprint
+    [correctWords]="correctWords"
+    [wrongWords]="unCorrectWords"
+    *ngIf="isFinish"
+    (replay)="replay($event)"
+  ></app-result-sprint>
   <div class="timer">
     <p class="time">{{timer}}
       <span class="clock"></span>
@@ -9,7 +14,11 @@
   <div class="round-data">
     <p class="score">{{score}}</p>
   </div>
-  <div class="round-container" [class.correct-answer]="isRight" [class.wrong-answer]="isWrong">
+  <div
+    class="round-container"
+    [class.correct-answer]="isCorrect"
+    [class.wrong-answer]="isWrong"
+  >
     <div class="media">
       <div class="example" (click)="playExample()">
         <span class="note"></span>
@@ -22,13 +31,25 @@
       </div>
     </div>
     <ul class="indicate-list">
-      <li *ngFor="let item of indicators" class="indicate-point" [class.active]="(item<=correctAnswerCount)?true:false"></li>
+      <li
+        *ngFor="let item of indicators"
+        class="indicate-point"
+        [class.active]="(item<=correctAnswerCount)?true:false"
+      ></li>
     </ul>
     <div class="word">{{word}}</div>
     <div class="transcript">{{transcript}}</div>
     <div class="round-controls">
-      <app-button text="неверно" color="orangered" (click)="checkAnswer(false)"></app-button>
-      <app-button text="верно" color="green" (click)="checkAnswer(true)"></app-button>
+      <app-button
+        text="неверно"
+        color="orangered"
+        (click)="checkAnswer(false)"
+      ></app-button>
+      <app-button
+        text="верно"
+        color="green"
+        (click)="checkAnswer(true)"
+      ></app-button>
     </div>
     <div class="arrows">
       <div class="arrow-left"></div>

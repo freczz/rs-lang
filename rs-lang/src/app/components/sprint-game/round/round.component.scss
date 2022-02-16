@@ -5,10 +5,9 @@
   flex-direction: column;
   width: 100%;
   margin: auto;
-  color: #fff;
+  color: #000;
   font-size: 25px;
   padding: 2rem 0;
-  background-color: #bdbcf3;
 
   .round-data {
     display: flex;
@@ -18,19 +17,28 @@
 
     .score {
       color: green;
-      font-size: 2rem;
+      font-size: 2.5rem;
+      padding-bottom: 1rem;
     }
   }
 
   .round-container {
-    background-color: #9897e2;
-    padding: 1rem;
-    border: 3px solid rgb(255, 255, 255);
+    background-color: #ffffff;
+    padding: 2rem;
     width: 100%;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
     gap: 1rem 0;
+    border: 2px solid #9e3af3;
+    box-shadow: 0 0 5px #9e3af3;
+    border-radius: 20px;
+    position: relative;
+    z-index: 10;
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
 
     .media {
       display: flex;
@@ -40,10 +48,15 @@
       gap: 0 1rem;
 
       .multiplier {
-        font-size: 1rem;
+        font-size: 1.5rem;
+
+        @media (max-width: 768px) {
+          font-size: 1rem;
+        }
 
         .points {
           font-weight: bold;
+          color: orange;
         }
       }
 
@@ -58,7 +71,7 @@
         padding: 0.5rem;
 
         &:hover {
-          background-color: rgb(173, 184, 214);
+          background-color: rgb(213, 218, 233);
         }
 
         &:active {
@@ -69,7 +82,7 @@
           display: inline-block;
           width: 20px;
           height: 20px;
-          background-image: url("../../../../assets/icons/note.svg");
+          background-image: url("../../../../assets/icons/note1.svg");
           background-position: center;
           background-size: 100%;
         }
@@ -81,7 +94,7 @@
         height: 20px;
         background-position: center;
         background-size: 100% 100%;
-        background-image: url("../../../../assets/icons/volume.svg");
+        background-image: url("../../../../assets/icons/volume1.svg");
       }
     }
 
@@ -93,23 +106,26 @@
 
     .word {
       font-weight: bold;
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
 
     .round-controls {
       display: flex;
       align-self: center;
       gap: 0 1rem;
+      padding-top: 1rem;
     }
   }
 }
 
 .correct-answer {
   border-color: green !important;
+  box-shadow: 0 0 6px green !important;
 }
 
 .wrong-answer {
   border-color: red !important;
+  box-shadow: 0 0 6px red !important;
 }
 
 .indicate-list {
@@ -141,12 +157,13 @@
   z-index: 1000;
   right: 5%;
   top: 5%;
+  color: #9e3af3;
 
   .clock {
     display: inline-block;
     width: 20px;
     height: 20px;
-    background-image: url("../../../../assets/icons/clock.svg");
+    background-image: url("../../../../assets/icons/clock-1.svg");
     background-position: center;
     background-size: 100%;
   }

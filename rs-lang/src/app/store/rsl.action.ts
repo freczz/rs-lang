@@ -10,8 +10,26 @@ export class SetToken {
   constructor(public token: string) {}
 }
 
+export class SetUserId {
+  static readonly type = '[RSL] Set user ID';
+
+  constructor(public userId: string) {}
+}
+
+export class SetRefreshToken {
+  static readonly type = '[RSL] Set refreshToken';
+
+  constructor(public refreshToken: string) {}
+}
+
 export class SetTextbookPage {
   static readonly type = '[RSL] Set textbook page';
 
   constructor(public textbookPage: string) {}
+}
+
+export class SetWordsLevel {
+  static readonly type = '[RSL] Set words level';
+
+  constructor(public wordsLevel: string) {}
 }
