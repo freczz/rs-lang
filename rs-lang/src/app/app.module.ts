@@ -18,7 +18,6 @@ import RoundComponent from './components/sprint-game/round/round.component';
 import StartComponent from './components/sprint-game/start/start.component';
 import LoadingComponent from './components/sprint-game/loading/loading.component';
 import ResultSprintComponent from './components/sprint-game/result-sprint/result-sprint.component';
-import SoundComponent from './components/sprint-game/sound/sound.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ import SoundComponent from './components/sprint-game/sound/sound.component';
     StartComponent,
     LoadingComponent,
     ResultSprintComponent,
-    SoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,8 +5,8 @@ import { NavigationStart, Router, Event as NavigationEvent } from '@angular/rout
 
 import HttpService from '../service/http.service';
 import RSLState from '../../../store/rsl.state';
-import SoundComponent from '../sound/sound.component';
-import { WordData, IGameResult, ISprintComponent, IWordSpecial } from '../../../interfaces/interfaces';
+import Sound from '../shared/sound';
+import { IWordData, IGameResult, ISprint, IWordSpecial } from '../../../interfaces/interfaces';
 import {
   DEFAULT_VALUE,
   PLAY_TIME,
@@ -23,7 +23,7 @@ import { getAllWordsSpecials } from '../../../utilities/server-requests';
   templateUrl: './round.component.html',
   styleUrls: ['./round.component.scss'],
 })
-class RoundComponent implements OnInit, OnDestroy, ISprintComponent {
+class RoundComponent implements OnInit, OnDestroy, ISprint {
   gameStatistic: IGameResult = { words: [], longLine: 0, bestLine: 0 };
 
   isRegistered: boolean;
@@ -36,7 +36,7 @@ class RoundComponent implements OnInit, OnDestroy, ISprintComponent {
 
   multiplier: number = 1;
 
-  words: WordData[] = [];
+  words: IWordData[] = [];
 
   tour: number = DEFAULT_VALUE;
 
@@ -46,9 +46,9 @@ class RoundComponent implements OnInit, OnDestroy, ISprintComponent {
 
   page: number;
 
-  correctWords: WordData[] = [];
+  correctWords: IWordData[] = [];
 
-  unCorrectWords: WordData[] = [];
+  unCorrectWords: IWordData[] = [];
 
   correctAnswerCount: number = DEFAULT_VALUE;
 
@@ -66,7 +66,7 @@ class RoundComponent implements OnInit, OnDestroy, ISprintComponent {
 
   indicators: number[] = INDICATORS;
 
-  sound: SoundComponent = new SoundComponent();
+  sound: Sound = new Sound();
 
   @Input() wordsLevel: string = '0';
 
@@ -102,10 +102,10 @@ class RoundComponent implements OnInit, OnDestroy, ISprintComponent {
       this.wordsLevel = this.store.selectSnapshot(RSLState.wordsLevel);
       const learnedWords: string[] = await this.getSpecialWords();
       for (let i = this.page; i >= 0; i--) {
-        this.httpService.getWordsData(this.wordsLevel, i).subscribe((data: WordData[]): void => {
-          const nextPage: WordData[] = data;
+        this.httpService.getWordsData(this.wordsLevel, i).subscribe((data: IWordData[]): void => {
+          const nextPage: IWordData[] = data;
           this.words = this.words.concat(nextPage);
-          this.words = this.words.filter((word: WordData): boolean => !learnedWords.includes(word.id));
+          this.words = this.words.filter((word: IWordData): boolean => !learnedWords.includes(word.id));
           if (!i) {
             this.startGame();
           }
@@ -113,8 +113,8 @@ class RoundComponent implements OnInit, OnDestroy, ISprintComponent {
       }
     } else {
       for (let i = 0; i < PAGES_AMOUNT; i++) {
-        this.httpService.getWordsData(this.wordsLevel, i).subscribe((data: WordData[]): void => {
-          const nextPage: WordData[] = data;
+        this.httpService.getWordsData(this.wordsLevel, i).subscribe((data: IWordData[]): void => {
+          const nextPage: IWordData[] = data;
           this.words = this.words.concat(nextPage);
           if (this.words.length === WORDS_AMOUNT) {
             this.startGame();

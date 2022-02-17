@@ -12,7 +12,7 @@ export interface ITeam {
   tasks: string[];
 }
 
-export interface WordData {
+export interface IWordData {
   id: string;
   group: number;
   page: number;
@@ -29,7 +29,7 @@ export interface WordData {
   wordTranslate: string;
 }
 
-export interface LevelGame {
+export interface ILevelGame {
   isStart: boolean;
   level: string;
 }
@@ -45,19 +45,19 @@ export interface IGameResult {
   bestLine: number;
 }
 
-export interface ISprintComponent {
+export interface ISprint {
   gameStatistic: IGameResult;
   score: number;
   timer: number;
   timerID: ReturnType<typeof setTimeout> | null;
   multiplier: number;
-  words: WordData[];
+  words: IWordData[];
   tour: number;
   word: string;
   transcript: string;
   page: number;
-  correctWords: WordData[];
-  unCorrectWords: WordData[];
+  correctWords: IWordData[];
+  unCorrectWords: IWordData[];
   correctAnswerCount: number;
   isAnswerOption: boolean;
   isLoading: boolean;

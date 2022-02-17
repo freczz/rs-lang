@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import RSLState from '../../../store/rsl.state';
-import { LevelGame } from '../../../interfaces/interfaces';
+import { ILevelGame } from '../../../interfaces/interfaces';
 import { LIST_LEVELS } from '../../../constants/constants';
 
 @Component({
@@ -22,7 +22,7 @@ class StartComponent implements OnInit {
   @ViewChild('levelBtns')
   levelsBtns: ElementRef = { nativeElement: '' };
 
-  @Output() checkLevel = new EventEmitter<LevelGame>();
+  @Output() setGameLevel = new EventEmitter<ILevelGame>();
 
   @Select(RSLState.prevVisitedPage) public prevVisitedPage$!: Observable<string>;
 
@@ -49,8 +49,8 @@ class StartComponent implements OnInit {
     this.level = target.id;
   }
 
-  change(isClick: boolean): void {
-    this.checkLevel.emit({ isStart: isClick, level: this.level });
+  changeLevel(isClick: boolean): void {
+    this.setGameLevel.emit({ isStart: isClick, level: this.level });
   }
 }
 

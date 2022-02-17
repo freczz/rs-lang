@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { LevelGame } from '../../interfaces/interfaces';
+import { Store } from '@ngxs/store';
+import RSLState from 'src/app/store/rsl.state';
+import { ILevelGame } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-sprint-game',
@@ -12,6 +14,8 @@ class SprintGameComponent {
   isVolume: boolean = true;
 
   level: string = '';
+
+  previousPath: string = '';
 
   @ViewChild('fullscreen')
   fullscreen: ElementRef = { nativeElement: '' };
@@ -29,7 +33,11 @@ class SprintGameComponent {
     }
   }
 
-  checkLevel(gameData: LevelGame): void {
+  constructor(private store: Store) {
+    this.previousPath = this.store.selectSnapshot(RSLState.prevVisitedPage);
+  }
+
+  setGameLevel(gameData: ILevelGame): void {
     this.condition = gameData.isStart;
     this.level = gameData.level;
   }

@@ -2,7 +2,7 @@ import { Store } from '@ngxs/store';
 import {
   IGameResult,
   IWordSpecial,
-  WordData,
+  IWordData,
   IUserSettings,
   IGameWords,
   IWordSetter,
@@ -120,7 +120,7 @@ async function setGamesStatistic(gameStatistic: IGameResult, game: string, store
   updateGameSettings(gameStatistic, game, store);
 }
 
-function saveResult(statistics: IGameResult, currentWord: WordData, isAnswer: boolean): void {
+function saveResult(statistics: IGameResult, currentWord: IWordData, isAnswer: boolean): void {
   const gameStatistic: IGameResult = statistics;
   if (isAnswer) {
     gameStatistic.longLine++;

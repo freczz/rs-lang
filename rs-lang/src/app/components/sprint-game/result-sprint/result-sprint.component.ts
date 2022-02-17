@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { WordData } from '../../../interfaces/interfaces';
+import { IWordData } from '../../../interfaces/interfaces';
 import { BASE_URL, DEFAULT_VALUE } from '../../../constants/constants';
 
 @Component({
@@ -9,23 +9,23 @@ import { BASE_URL, DEFAULT_VALUE } from '../../../constants/constants';
   styleUrls: ['./result-sprint.component.scss'],
 })
 class ResultSprintComponent implements OnInit {
-  @Input() correctWords: WordData[] = [];
+  @Input() correctWords: IWordData[] = [];
 
-  @Input() wrongWords: WordData[] = [];
+  @Input() wrongWords: IWordData[] = [];
 
   @Output() replay = new EventEmitter<boolean>();
 
-  mistake: number = DEFAULT_VALUE;
+  mistakes: number = DEFAULT_VALUE;
 
-  knows: number = DEFAULT_VALUE;
+  truths: number = DEFAULT_VALUE;
 
   audio: HTMLAudioElement = new Audio();
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.mistake = this.wrongWords.length;
-    this.knows = this.correctWords.length;
+    this.mistakes = this.wrongWords.length;
+    this.truths = this.correctWords.length;
   }
 
   playSound(url: string): void {
@@ -38,7 +38,7 @@ class ResultSprintComponent implements OnInit {
     this.replay.emit(increased);
   }
 
-  moveMainPage(): void {
+  goToMainPage(): void {
     this.router.navigate(['']);
   }
 }
