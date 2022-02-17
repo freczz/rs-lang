@@ -1,4 +1,4 @@
-import { ITeam, IUserSettingsData, IUserStatisticData } from '../interfaces/interfaces';
+import { ITeam, IUserSettingsData, IUserStatisticData, IGameStatistic } from '../interfaces/interfaces';
 
 export const team: ITeam[] = [
   {
@@ -127,3 +127,21 @@ export const enum TokenTimeLimit {
 }
 
 export const MILLISECOND: number = 60000;
+
+export const GAME_STATISTIC: IGameStatistic[] = [
+  {
+    class: 'learned',
+    title: 'Изучено слов:',
+    value: '0',
+  },
+  {
+    class: 'ratio',
+    title: 'Правильных ответов:',
+    value: '0',
+  },
+  {
+    class: 'bestLine',
+    title: 'Самая длинная серия правлиьных ответов:',
+    value: '0',
+  }
+]

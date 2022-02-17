@@ -32,7 +32,7 @@ export default class HeaderComponent implements OnInit {
       content: 'Аудиовызов',
     },
     {
-      url: '/',
+      url: '/statistic',
       content: 'Статистика',
     },
   ];

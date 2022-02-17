@@ -7,6 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { NgChartsModule } from 'ng2-charts';
+
 import RSLState from './store/rsl.state';
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
@@ -21,6 +23,8 @@ import LoadingComponent from './components/sprint-game/loading/loading.component
 import ResultSprintComponent from './components/sprint-game/result-sprint/result-sprint.component';
 import AudiocallGameComponent from './components/audiocall-game/audiocall-game.component';
 import AuthPageComponent from './components/auth-page/auth-page.component';
+import { StatisticPageComponent } from './components/statistic-page/statistic-page.component';
+import { BarChartComponent } from './components/statistic-page/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,8 @@ import AuthPageComponent from './components/auth-page/auth-page.component';
     LoadingComponent,
     ResultSprintComponent,
     AudiocallGameComponent,
+    StatisticPageComponent,
+    BarChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +53,7 @@ import AuthPageComponent from './components/auth-page/auth-page.component';
       developmentMode: !environment.production,
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

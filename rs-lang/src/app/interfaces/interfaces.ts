@@ -187,3 +187,9 @@ export interface IUserStatisticData {
   learnedWords: number;
   optional: IPeriod;
 }
+
+export interface IGameStatistic {
+  class: string;
+  title: string;
+  value: string;
+}
