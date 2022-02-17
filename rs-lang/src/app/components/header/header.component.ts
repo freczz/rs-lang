@@ -15,7 +15,7 @@ export default class HeaderComponent {
       content: 'Учебник',
     },
     {
-      url: '/',
+      url: '/sprint',
       content: 'Спринт',
     },
     {

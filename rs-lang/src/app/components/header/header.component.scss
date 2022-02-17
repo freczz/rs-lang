@@ -196,7 +196,7 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
     .nav {
       flex: 0 0 50%;
       background-size: 0;
-      
+
       @media (max-width: 768px) {
         position: fixed;
         z-index: 100;
@@ -248,7 +248,7 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
             width: 0;
             height: 1px;
             background-color: #000;
-            transition: all 0.3s ease 0s; 
+            transition: all 0.3s ease 0s;
 
             @media (max-width: 1200px) {
               bottom: calc(15px + 10 * ((100vw - 768px) / (1200 - 768)));
@@ -268,7 +268,7 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
               width: 0;
               height: 1px;
               background-color: #000;
-              transition: all 0.3s ease 0s; 
+              transition: all 0.3s ease 0s;
               bottom: 50%;
               right: 0;
             }
@@ -324,7 +324,7 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
 
       @media (max-width: 768px) {
         position: absolute;
-        z-index: 100; 
+        z-index: 100;
         top: calc(200px + 120 * ((100vw - 420px) / (768 - 420)) + $headerHeight);
         left: 110vw;
         transition: .3s 0s;
@@ -336,7 +336,7 @@ $headerBtnHeight: calc(28px + 4 * ((100vw - 768px) / (1920 - 768)));
         text-shadow: 0px 0px 1px #9e3af3;
         top: 24px;
         display: flex;
-        justify-content: center;  
+        justify-content: center;
         align-items: center;
         width: 100px;
         height: 32px;

@@ -1,0 +1,105 @@
+.popup-result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  background-image: url("../../../../assets/svg/undraw_happy.svg");
+  background-position: right bottom;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+
+  .result-wrapper {
+    color: black;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 2px solid #9e3af3;
+    box-shadow: 0 0 5px #9e3af3;
+    border-radius: 20px;
+
+    .result-container {
+      overflow: auto;
+      max-height: 75vh;
+
+      .result-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .mistakes,
+      .knowing {
+        padding: 1rem 0;
+      }
+
+      .wrong-words {
+        position: relative;
+        padding-bottom: 1rem;
+
+        ::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          border-bottom: 1px dotted #000000;
+        }
+      }
+
+      .wrong-word,
+      .correct-word {
+        display: flex;
+        align-items: center;
+        gap: 0 0.5rem;
+        padding: 0.5rem 0;
+        list-style: none;
+
+        .volume-icon {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-position: center;
+          background-size: 100% 100%;
+          background-image: url("../../../../assets/icons/volume-fill1.svg");
+          cursor: pointer;
+          transition: 0.3s;
+
+          &:hover {
+            background-color: #b288d6;
+            border-radius: 50%;
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
+        }
+      }
+
+      .mistakes-count,
+      .knowing-count {
+        display: inline-block;
+        padding: 0 0.5rem;
+        color: white;
+        background-color: rgb(230, 95, 95);
+        border-radius: 0.5rem;
+      }
+
+      .knowing-count {
+        background-color: rgb(78, 131, 78);
+      }
+    }
+
+    .result-controls {
+      display: flex;
+      align-items: center;
+      gap: 0 1rem;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+.wrapper-sprint {
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  background-image: url('../../../assets/svg/games.svg');
+  background-position: right bottom;
+  background-size: 50%;
+  background-repeat: no-repeat;
+
+  .sprint-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.sprint-controls {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  position: absolute;
+  z-index: 1000;
+  left: 5%;
+  top: 5%;
+}
+
+.close-icon,
+.fullscreen-icon,
+.volume-icon {
+  display: inline-block;
+  background-position: center;
+  width: 20px;
+  height: 20px;
+  background-size: 100% 100%;
+  opacity: 0.8;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.close-icon {
+  background-image: url('../../../assets/icons/close.svg');
+}
+
+.fullscreen-icon {
+  background-image: url('../../../assets/icons/fullscreen1.svg');
+}
+
+.active-full {
+  background-image: url('../../../assets/icons/fullscreen_exit1.svg');
+}
+
+.volume-icon {
+  background-image: url('../../../assets/icons/volume1.svg');
+}
+
+.active-volume {
+  background-image: url('../../../assets/icons/mute1.svg');
+}
