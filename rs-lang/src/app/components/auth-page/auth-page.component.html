@@ -3,7 +3,7 @@
     <div class="auth__new new" *ngIf='isNewUser'>
       <h2 class="auth__title">Зарегистрируйся в RS Lang</h2>
       <p class="auth__text">и изучай английский с нами!</p>
-      <form action="" class="new__form form" [formGroup]="newUserForm" (ngSubmit)="getProfile({
+      <form class="new__form form" [formGroup]="newUserForm" (ngSubmit)="getProfile({
         name: newUserForm.get('name')?.value,
         email: newUserForm.get('email')?.value,
         password: newUserForm.get('password')?.value,
@@ -110,7 +110,7 @@
     <div class="auth__old old" *ngIf='!isNewUser'>
       <h2 class="auth__title">Войди в свой аккаунт</h2>
       <p class="auth__text">и продолжи обучение!</p>
-      <form action="" class="old__form form" [formGroup]="oldUserForm" (ngSubmit)="getProfile({
+      <form class="old__form form" [formGroup]="oldUserForm" (ngSubmit)="getProfile({
         email: oldUserForm.get('email')?.value,
         password: oldUserForm.get('password')?.value
       })">

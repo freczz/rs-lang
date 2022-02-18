@@ -4,7 +4,7 @@ import environment from 'src/environments/environment';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import RSLState from './store/rsl.state';
@@ -20,6 +20,7 @@ import StartComponent from './components/sprint-game/start/start.component';
 import LoadingComponent from './components/sprint-game/loading/loading.component';
 import ResultSprintComponent from './components/sprint-game/result-sprint/result-sprint.component';
 import AudiocallGameComponent from './components/audiocall-game/audiocall-game.component';
+import AuthPageComponent from './components/auth-page/auth-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import AudiocallGameComponent from './components/audiocall-game/audiocall-game.c
     MainPageComponent,
     HeaderComponent,
     FooterComponent,
+    AuthPageComponent,
     SprintGameComponent,
     ButtonComponent,
     RoundComponent,
@@ -38,6 +40,8 @@ import AudiocallGameComponent from './components/audiocall-game/audiocall-game.c
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgxsModule.forRoot([RSLState], {
       developmentMode: !environment.production,

@@ -53,6 +53,10 @@ export const MAX_WORD_NUMBER = 19;
 
 export const GAME_LEVELS = ['0', '1', '2', '3', '4', '5'];
 
+export const EMAIL_PATTERN: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+
+export const PASSWORD_MIN_LENGTH: number = 8;
+
 export const enum PointsData {
   limitAnswers = 3,
   coefficient = 10,

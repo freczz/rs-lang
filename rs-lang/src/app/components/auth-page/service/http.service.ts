@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SERVER_URL } from 'src/app/constants/constants';
+import { BASE_URL } from 'src/app/constants/constants';
 import { IFormData, IUserData } from 'src/app/interfaces/interfaces';
 
 @Injectable({
@@ -13,7 +13,7 @@ export default class HttpService {
   constructor(private http: HttpClient) {}
 
   registerUser(formData: IFormData): Observable<IUserData> {
-    return this.http.post<IUserData>(`${SERVER_URL}/users`, formData, {
+    return this.http.post<IUserData>(`${BASE_URL}users`, formData, {
       headers: new HttpHeaders({
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export default class HttpService {
   }
 
   signInUser(formData: IFormData): Observable<IUserData> {
-    return this.http.post<IUserData>(`${SERVER_URL}/signin`, formData, {
+    return this.http.post<IUserData>(`${BASE_URL}signin`, formData, {
       headers: new HttpHeaders({
         Accept: 'application/json',
         'Content-Type': 'application/json',

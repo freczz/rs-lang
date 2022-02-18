@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IFormData, IUserData } from 'src/app/interfaces/interfaces';
-import { RSLState } from 'src/app/store/rsl.state';
+import RSLState from 'src/app/store/rsl.state';
 import { Select, Store } from '@ngxs/store';
 import comparePasswordsValidator from 'src/app/utilities/validators';
 import { Observable } from 'rxjs';
-import { SetToken } from 'src/app/store/rsl.action';
+import { SetRefreshToken, SetToken, SetUserId } from 'src/app/store/rsl.action';
+import { EMAIL_PATTERN, PASSWORD_MIN_LENGTH } from 'src/app/constants/constants';
 import HttpService from './service/http.service';
 
 @Component({
@@ -14,13 +15,13 @@ import HttpService from './service/http.service';
   templateUrl: './auth-page.component.html',
   styleUrls: ['./auth-page.component.scss'],
 })
-export default class AuthPageComponent implements OnInit {
+export default class AuthPageComponent {
   newUserForm: FormGroup = this.formBuilder.group(
     {
       name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
-      confirm: [null, [Validators.required, Validators.minLength(8)]],
+      email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
+      password: [null, [Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH)]],
+      confirm: [null, [Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH)]],
     },
     {
       validator: comparePasswordsValidator('password', 'confirm'),
@@ -28,17 +29,25 @@ export default class AuthPageComponent implements OnInit {
   );
 
   oldUserForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-    password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+    email: new FormControl('', [Validators.required, Validators.pattern(EMAIL_PATTERN)]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH)]),
   });
 
   error: string = '';
 
-  isNewUser = true;
+  isNewUser: boolean = true;
+
+  userId: string = '';
 
   token: string = '';
 
+  refreshToken: string = '';
+
+  @Select(RSLState.userId) public userId$!: Observable<string>;
+
   @Select(RSLState.token) public token$!: Observable<string>;
+
+  @Select(RSLState.refreshToken) public refreshToken$!: Observable<string>;
 
   constructor(
     private router: Router,
@@ -46,10 +55,6 @@ export default class AuthPageComponent implements OnInit {
     public httpService: HttpService,
     private formBuilder: FormBuilder
   ) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(new SetToken(this.token));
-  }
 
   togglePage(): void {
     this.newUserForm.reset();
@@ -71,8 +76,8 @@ export default class AuthPageComponent implements OnInit {
     if (this.newUserForm.valid || this.oldUserForm.valid) {
       if (this.isNewUser) {
         this.httpService.registerUser(formData).subscribe(
-          () => this.signInUser(formData),
-          (err) => {
+          (): Promise<void> => this.signInUser(formData),
+          (err: string): void => {
             this.error = err;
           }
         );
@@ -85,19 +90,23 @@ export default class AuthPageComponent implements OnInit {
   async signInUser(formData: IFormData): Promise<void> {
     this.httpService.signInUser(formData).subscribe(
       async (userData: IUserData): Promise<void> => {
+        this.userId = userData.userId as string;
         this.token = userData.token as string;
-        const user = {
-          userId: userData.userId as string,
+        this.refreshToken = userData.refreshToken as string;
+        const user: IUserData = {
+          userId: this.userId,
           token: this.token,
-          refreshToken: userData.refreshToken as string,
+          refreshToken: this.refreshToken,
         };
         localStorage.setItem('userInfo', JSON.stringify(user));
         this.error = '';
         await this.router.navigate(['/']);
 
+        this.store.dispatch(new SetUserId(this.userId));
         this.store.dispatch(new SetToken(this.token));
+        this.store.dispatch(new SetRefreshToken(this.refreshToken));
       },
-      (err) => {
+      (err: string): void => {
         this.error = err;
       }
     );
