@@ -48,4 +48,4 @@ import { AudiocallGameComponent } from './components/audiocall-game/audiocall-ga
   providers: [],
   bootstrap: [AppComponent],
 })
-export default class AppModule { }
+export default class AppModule {}

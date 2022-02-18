@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild, HostListener, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import RSLState from '../../store/rsl.state';
 import {
   COUNT_ANSWER,
@@ -106,7 +107,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
 
   @Select(RSLState.prevVisitedPage) public prevVisitedPage$!: Observable<string>;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.prevVisitedPage = this.store.selectSnapshot(RSLState.prevVisitedPage);
@@ -308,5 +309,9 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
       this.numberRound--;
       this.generateAnswers();
     }
+  }
+
+  goToMainPage(): void {
+    this.router.navigate(['']);
   }
 }
