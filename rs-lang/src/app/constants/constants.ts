@@ -94,5 +94,3 @@ export const enum NextOrKnow {
   next = 'Далее',
   know = 'Не знаю',
 }
-
-export const serverLink = 'https://angular-rslang.herokuapp.com/';
