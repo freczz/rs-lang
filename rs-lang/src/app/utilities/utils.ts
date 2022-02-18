@@ -138,4 +138,9 @@ function getWordsLearned(words: IWordSpecial[]): string[] {
     .map((word: IWordSpecial) => word.wordId);
 }
 
+export default function randomNumberByInterval(min: number, max: number): number {
+  const rand: number = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+}
+
 export { isRight, getRandomNumber, saveResult, getWordsLearned, setGamesStatistic };

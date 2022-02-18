@@ -4,6 +4,7 @@ import environment from 'src/environments/environment';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { HttpClientModule } from '@angular/common/http';
 
 import RSLState from './store/rsl.state';
@@ -18,6 +19,7 @@ import RoundComponent from './components/sprint-game/round/round.component';
 import StartComponent from './components/sprint-game/start/start.component';
 import LoadingComponent from './components/sprint-game/loading/loading.component';
 import ResultSprintComponent from './components/sprint-game/result-sprint/result-sprint.component';
+import AudiocallGameComponent from './components/audiocall-game/audiocall-game.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import ResultSprintComponent from './components/sprint-game/result-sprint/result
     StartComponent,
     LoadingComponent,
     ResultSprintComponent,
+    AudiocallGameComponent,
   ],
   imports: [
     BrowserModule,
