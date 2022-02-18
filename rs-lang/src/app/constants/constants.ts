@@ -41,6 +41,18 @@ export const PAGES_AMOUNT: number = 30;
 
 export const WORDS_AMOUNT: number = 600;
 
+export const SERVER_LINK: string = 'https://angular-rslang.herokuapp.com/';
+
+export const ROUND_COUNT: number = 10;
+
+export const COUNT_ANSWER: number = 5;
+
+export const MAX_PAGE: number = 29;
+
+export const MAX_WORD_NUMBER = 19;
+
+export const GAME_LEVELS = ['0', '1', '2', '3', '4', '5'];
+
 export const enum PointsData {
   limitAnswers = 3,
   coefficient = 10,
@@ -77,3 +89,10 @@ export const enum StatesDefault {
   win = '1-0-1',
   lose = '0-1-0',
 }
+
+export const enum NextOrKnow {
+  next = 'Далее',
+  know = 'Не знаю',
+}
+
+export const serverLink = 'https://angular-rslang.herokuapp.com/';
