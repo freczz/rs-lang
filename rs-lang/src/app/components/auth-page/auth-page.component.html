@@ -1,0 +1,170 @@
+<main>
+  <section class="auth" [ngStyle]="{'background-image': 'url(./assets/svg/authentication.svg)'}">
+    <div class="auth__new new" *ngIf='isNewUser'>
+      <h2 class="auth__title">Зарегистрируйся в RS Lang</h2>
+      <p class="auth__text">и изучай английский с нами!</p>
+      <form class="new__form form" [formGroup]="newUserForm" (ngSubmit)="getProfile({
+        name: newUserForm.get('name')?.value,
+        email: newUserForm.get('email')?.value,
+        password: newUserForm.get('password')?.value,
+        confirm: newUserForm.get('confirm')?.value
+      })">
+        <div class="form__name form__item">
+          <fieldset>
+            <legend>Имя *</legend>
+            <input
+              type="text"
+              name="name"
+              formControlName="name"
+            />
+          </fieldset>
+          <div
+            *ngIf="newUserForm.get('name')?.invalid && newUserForm.get('name')?.touched"
+            class="form__validation"
+          >
+            <small *ngIf="newUserForm.get('name')?.errors?.['required']">
+              Поле имени не должно быть пустым.
+            </small>
+          </div>
+        </div>
+        <div class="form__email form__item">
+          <fieldset>
+            <legend>Email *</legend>
+            <input
+              type="email"
+              name="email"
+              formControlName="email"
+              autocomplete="email"
+            >
+          </fieldset>
+          <div
+            *ngIf="newUserForm.get('email')?.invalid && newUserForm.get('email')?.touched"
+            class="form__validation"
+          >
+            <small *ngIf="newUserForm.get('email')?.errors?.['required']">
+              Поле email не должно быть пустым.
+            </small>
+            <small *ngIf="newUserForm.get('email')?.errors?.['pattern']">
+              Введите корректный email.
+            </small>
+          </div>
+        </div>
+        <div class="form__password form__item">
+          <fieldset>
+            <legend>Пароль *</legend>
+            <input
+              class="password"
+              type="password"
+              name="password"
+              formControlName="password"
+              autocomplete="new-password"
+              #password
+            >
+          </fieldset>
+          <div
+            *ngIf="newUserForm.get('password')?.invalid && newUserForm.get('password')?.touched"
+            class="form__validation"
+          >
+            <small *ngIf="newUserForm.get('password')?.errors?.['required']">
+              Поле password не должно быть пустым.
+            </small>
+            <small *ngIf="newUserForm.get('password')?.errors?.['minlength']">
+              Длина пароля должна быть не менее {{newUserForm.get('password')?.errors?.['minlength'].requiredLength}} символов.
+              Сейчас: {{newUserForm.get('password')?.errors?.['minlength'].actualLength}}.
+            </small>
+          </div>
+        </div>
+        <div class="form__confirm form__item">
+          <fieldset>
+            <legend>Подтвердить пароль *</legend>
+            <input
+              type="password"
+              name="confirm"
+              formControlName="confirm"
+              autocomplete="new-password"
+            >
+          </fieldset>
+          <div
+            *ngIf="newUserForm.get('confirm')?.invalid && newUserForm.get('confirm')?.touched"
+            class="form__validation"
+          >
+            <small *ngIf="newUserForm.get('confirm')?.errors?.['required']">
+              Поле password confirm не должно быть пустым.
+            </small>
+            <small *ngIf="newUserForm.get('confirm')?.errors?.['minlength']">
+              Длина пароля должна быть не менее {{newUserForm.get('confirm')?.errors?.['minlength'].requiredLength}} символов.
+              Сейчас: {{newUserForm.get('confirm')?.errors?.['minlength'].actualLength}}.
+            </small>
+            <small *ngIf="newUserForm.get('confirm')?.errors?.['concurrence']">
+              Пароли должны совпадать.
+            </small>
+          </div>
+        </div>
+        <div class="form__submit" (click)="checkValidators()">
+          <small *ngIf="error">Пользователь с таким email уже существует</small>
+          <button type="submit">Зарегистрироваться</button>
+        </div>
+      </form>
+      <p class="auth__other">Уже есть аккаунт? <span (click)="togglePage()">Войти</span></p>
+    </div>
+    <div class="auth__old old" *ngIf='!isNewUser'>
+      <h2 class="auth__title">Войди в свой аккаунт</h2>
+      <p class="auth__text">и продолжи обучение!</p>
+      <form class="old__form form" [formGroup]="oldUserForm" (ngSubmit)="getProfile({
+        email: oldUserForm.get('email')?.value,
+        password: oldUserForm.get('password')?.value
+      })">
+        <div class="form__email form__item">
+          <fieldset>
+            <legend>Email *</legend>
+            <input
+              type="email"
+              name="email"
+              formControlName="email"
+              autocomplete="email"
+            >
+          </fieldset>
+          <div
+            *ngIf="oldUserForm.get('email')?.invalid && oldUserForm.get('email')?.touched"
+            class="form__validation"
+          >
+            <small *ngIf="oldUserForm.get('email')?.errors?.['required']">
+              Поле email не должно быть пустым.
+            </small>
+            <small *ngIf="oldUserForm.get('email')?.errors?.['pattern']">
+              Введите корректный email.
+            </small>
+          </div>
+        </div>
+        <div class="form__password form__item">
+          <fieldset>
+            <legend>Пароль *</legend>
+            <input
+              type="password"
+              name="password"
+              formControlName="password"
+              autocomplete="new-password"
+            >
+          </fieldset>
+          <div
+            *ngIf="oldUserForm.get('password')?.invalid && oldUserForm.get('password')?.touched"
+            class="form__validation"
+          >
+            <small *ngIf="oldUserForm.get('password')?.errors?.['required']">
+              Поле password не должно быть пустым.
+            </small>
+            <small *ngIf="oldUserForm.get('password')?.errors?.['minlength']">
+              Длина пароля должна быть не менее {{oldUserForm.get('password')?.errors?.['minlength'].requiredLength}} символов.
+              Сейчас: {{oldUserForm.get('password')?.errors?.['minlength'].actualLength}}.
+            </small>
+          </div>
+        </div>
+        <div class="form__submit" (click)="checkValidators()">
+          <small *ngIf="error">Пользователь с таким email не найден</small>
+          <button type="submit">Войти</button>
+        </div>
+      </form>
+      <p class="auth__other">Ещё нет аккаунта? <span (click)="togglePage()">Зарегистрироваться</span></p>
+    </div>
+  </section>
+</main>
