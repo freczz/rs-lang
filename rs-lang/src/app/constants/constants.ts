@@ -1,4 +1,4 @@
-import { ITeam } from '../interfaces/interfaces';
+import { ITeam, IUserSettingsData, IUserStatisticData } from '../interfaces/interfaces';
 
 export const team: ITeam[] = [
   {
@@ -97,4 +97,24 @@ export const enum StatesDefault {
 export const enum NextOrKnow {
   next = 'Далее',
   know = 'Не знаю',
+}
+
+export const USER_SETTINGS: IUserSettingsData = {
+  optional: {
+    sprint: '0-0-0',
+    audio: '0-0-0',
+  },
+  wordsPerDay: 0,
+};
+
+export const USER_STATISTIC: IUserStatisticData = {
+  optional: {
+    period: '[]',
+  },
+  learnedWords: 0,
+};
+
+export const enum ActionLearned {
+  added,
+  removed,
 }

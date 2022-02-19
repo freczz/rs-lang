@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
@@ -23,7 +23,7 @@ import { getAllWordsSpecials } from '../../../utilities/server-requests';
   templateUrl: './round.component.html',
   styleUrls: ['./round.component.scss'],
 })
-class RoundComponent implements OnInit, OnDestroy, ISprint {
+class RoundComponent implements OnInit, ISprint {
   gameStatistic: IGameResult = { words: [], longLine: 0, bestLine: 0 };
 
   isRegistered: boolean;
@@ -132,12 +132,6 @@ class RoundComponent implements OnInit, OnDestroy, ISprint {
     return [];
   }
 
-  ngOnDestroy(): void {
-    if (this.isRegistered) {
-      setGamesStatistic(this.gameStatistic, 'sprint', this.store);
-    }
-  }
-
   startGame(): void {
     this.setRound();
     this.isLoading = false;
@@ -183,7 +177,7 @@ class RoundComponent implements OnInit, OnDestroy, ISprint {
       this.unCorrectWords.push(this.words[this.tour]);
       this.resetAnswerLimit();
     }
-    saveResult(this.gameStatistic, this.words[this.tour], isTrue === this.isAnswerOption);
+    saveResult(this.gameStatistic, this.words[this.tour].id, isTrue === this.isAnswerOption);
     setTimeout((): void => {
       this.updateParameters();
       this.setRound();
@@ -233,6 +227,9 @@ class RoundComponent implements OnInit, OnDestroy, ISprint {
     this.isFinish = true;
     if (this.timerID) clearTimeout(this.timerID);
     this.sound.playEndTour(this.isVolumeOn);
+    if (this.isRegistered) {
+      setGamesStatistic(this.gameStatistic, 'sprint', this.store);
+    }
   }
 
   resetGame(): void {

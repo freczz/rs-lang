@@ -11,8 +11,8 @@ import {
   GAME_LEVELS,
   NextOrKnow,
 } from '../../constants/constants';
-import { IAudiocallGame, Words } from '../../interfaces/interfaces';
-import randomNumberByInterval from '../../utilities/utils';
+import { IAudiocallGame, IGameResult, Words } from '../../interfaces/interfaces';
+import randomNumberByInterval, { saveResult, setGamesStatistic } from '../../utilities/utils';
 
 @Component({
   selector: 'app-audiocall-game',
@@ -105,9 +105,19 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
 
   levels = GAME_LEVELS;
 
+  wordIds: string[] = [];
+
+  curWordId: string = '';
+
+  gameStatistic: IGameResult = { words: [], longLine: 0, bestLine: 0 };
+
+  isRegistered: boolean;
+
   @Select(RSLState.prevVisitedPage) public prevVisitedPage$!: Observable<string>;
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router) {
+    this.isRegistered = !!this.store.selectSnapshot(RSLState.userId);
+  }
 
   ngOnInit(): void {
     this.prevVisitedPage = this.store.selectSnapshot(RSLState.prevVisitedPage);
@@ -150,8 +160,10 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
         this.wordsEng.push(words[i][wordNumber].word);
         this.wordsRu.push(words[i][wordNumber].wordTranslate);
         this.audios.push(words[i][wordNumber].audio);
+        this.wordIds.push(words[i][wordNumber].id);
       }
       this.trueAnswerNumber = randomNumberByInterval(0, 4);
+      this.curWordId = this.wordIds[this.trueAnswerNumber];
     } else {
       promises.push(this.getWords());
       const words: Words[] = await Promise.all(promises);
@@ -161,6 +173,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
         this.wordsEng.push(words[0][wordNumber].word);
         this.wordsRu.push(words[0][wordNumber].wordTranslate);
         this.audios.push(words[0][wordNumber].audio);
+        this.wordIds.push(words[0][wordNumber].id);
       }
       this.setTrueAnswerFromTextbook(words);
     }
@@ -179,6 +192,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
     this.wordsEng[this.trueAnswerNumber] = words[0][this.numberRound].word;
     this.wordsRu[this.trueAnswerNumber] = words[0][this.numberRound].wordTranslate;
     this.audios[this.trueAnswerNumber] = words[0][this.numberRound].audio;
+    this.curWordId = this.wordIds[this.trueAnswerNumber];
   }
 
   generateAudio(): void {
@@ -242,6 +256,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
       this.wordsLose[1].push(this.wordsRu[this.trueAnswerNumber]);
       this.loseAudios.push(this.audios[this.trueAnswerNumber]);
     }
+    saveResult(this.gameStatistic, this.curWordId, answerText === this.wordsRu[this.trueAnswerNumber]);
   }
 
   showTrueAnswer(): void {
@@ -254,6 +269,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
   showNextQuestion(): void {
     this.buttonDisabled = false;
     if (this.nextOrKnow === 'Не знаю') {
+      saveResult(this.gameStatistic, this.curWordId, false);
       if (this.roundCount === this.numberRound) {
         this.showResult();
       }
@@ -276,6 +292,9 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
   showResult(): void {
     this.visibleResult = true;
     this.visibleAudiocallGame = false;
+    if (this.isRegistered) {
+      setGamesStatistic(this.gameStatistic, 'audio', this.store);
+    }
   }
 
   playAuidoInResult(event: MouseEvent): void {
@@ -299,6 +318,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
     this.wordsWin = [[], []];
     this.wordsLose = [[], []];
     this.winsAudios = [];
+    this.wordIds = [];
   }
 
   checkIdenticalAnswers(): void {

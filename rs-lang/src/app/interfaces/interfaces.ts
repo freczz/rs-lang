@@ -178,3 +178,12 @@ export interface IUserData {
   name?: string;
   message?: string;
 }
+
+export interface IPeriod {
+  period: string;
+}
+
+export interface IUserStatisticData {
+  learnedWords: number;
+  optional: IPeriod;
+}

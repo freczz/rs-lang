@@ -6,9 +6,10 @@ import RSLState from 'src/app/store/rsl.state';
 import { Select, Store } from '@ngxs/store';
 import comparePasswordsValidator from 'src/app/utilities/validators';
 import { Observable } from 'rxjs';
-import { SetRefreshToken, SetToken, SetUserId } from 'src/app/store/rsl.action';
+import { SetRefreshToken, SetToken, SetUserDate, SetUserId } from 'src/app/store/rsl.action';
 import { EMAIL_PATTERN, PASSWORD_MIN_LENGTH } from 'src/app/constants/constants';
 import HttpService from './service/http.service';
+import { FactoryTarget } from '@angular/compiler';
 
 @Component({
   selector: 'app-auth-page',
@@ -105,6 +106,7 @@ export default class AuthPageComponent {
         this.store.dispatch(new SetUserId(this.userId));
         this.store.dispatch(new SetToken(this.token));
         this.store.dispatch(new SetRefreshToken(this.refreshToken));
+        this.store.dispatch(new SetUserDate(+Date.now()));
       },
       (err: string): void => {
         this.error = err;

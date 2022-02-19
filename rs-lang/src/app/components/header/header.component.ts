@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { INavLinks } from 'src/app/interfaces/interfaces';
-import { SetRefreshToken, SetToken, SetUserId } from 'src/app/store/rsl.action';
+import { SetRefreshToken, SetToken, SetUserDate, SetUserId } from 'src/app/store/rsl.action';
 import RSLState from 'src/app/store/rsl.state';
 
 @Component({
@@ -62,6 +62,7 @@ export default class HeaderComponent implements OnInit {
     this.store.dispatch(new SetUserId(''));
     this.store.dispatch(new SetToken(''));
     this.store.dispatch(new SetRefreshToken(''));
+    this.store.dispatch(new SetUserDate(0));
     this.isRegistered = false;
   }
 
