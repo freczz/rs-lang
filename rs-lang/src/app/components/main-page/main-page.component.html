@@ -1,4 +1,9 @@
-<main>
+<main (window:scroll) = "trackScroll()">
+  <div class="arrow__navigate"
+   *ngIf = "isVisibleArrow"
+   (click) = "backToTop()"
+   >
+  </div>
   <section class="greeting">
     <div class="container">
       <div class="greeting__body">

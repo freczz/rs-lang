@@ -9,6 +9,11 @@
       {{ item }}
     </div>
   </div>
+  <input type="checkbox"
+  class="custom-checkbox"
+  id = "check"
+  (click) = "setCheckboxStatus($event)">
+<label for="check">Повышенный уровень сложности</label>
 </div>
 <div class="audiocall-container"
  *ngIf="visibleAudiocallGame"
@@ -16,6 +21,9 @@
   <div class="volume-img"
   #audioPlay
   (click)="playAudio()"></div>
+  <div class="hearts-container" *ngIf = "visibleHeart">
+    <div class="heart" *ngFor = "let item of heartCount; index as i"></div>
+  </div>
   <div class="card-container" *ngIf="visibleCardContainer">
     <div class="true-answer-img" [style.background]="trueAnswerImage"></div>
     <p class="answer-text">{{ answerText }}</p>
