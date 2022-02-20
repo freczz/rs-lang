@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 import { SetRefreshToken, SetToken, SetUserDate, SetUserId } from 'src/app/store/rsl.action';
 import { EMAIL_PATTERN, PASSWORD_MIN_LENGTH } from 'src/app/constants/constants';
 import HttpService from './service/http.service';
-import { FactoryTarget } from '@angular/compiler';
 
 @Component({
   selector: 'app-auth-page',
@@ -94,15 +93,8 @@ export default class AuthPageComponent {
         this.userId = userData.userId as string;
         this.token = userData.token as string;
         this.refreshToken = userData.refreshToken as string;
-        const user: IUserData = {
-          userId: this.userId,
-          token: this.token,
-          refreshToken: this.refreshToken,
-        };
-        localStorage.setItem('userInfo', JSON.stringify(user));
         this.error = '';
         await this.router.navigate(['/']);
-
         this.store.dispatch(new SetUserId(this.userId));
         this.store.dispatch(new SetToken(this.token));
         this.store.dispatch(new SetRefreshToken(this.refreshToken));

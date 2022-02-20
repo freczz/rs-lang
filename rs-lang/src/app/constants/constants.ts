@@ -120,3 +120,10 @@ export const enum ActionLearned {
   added,
   removed,
 }
+
+export const enum TokenTimeLimit {
+  end = 269,
+  refresh = 239,
+}
+
+export const MILLISECOND: number = 60000;

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { INavLinks } from 'src/app/interfaces/interfaces';
+import { MILLISECOND, TokenTimeLimit } from 'src/app/constants/constants';
+import { INavLinks, IUserData } from 'src/app/interfaces/interfaces';
 import { SetRefreshToken, SetToken, SetUserDate, SetUserId } from 'src/app/store/rsl.action';
 import RSLState from 'src/app/store/rsl.state';
+import HttpService from '../sprint-game/service/http.service';
 
 @Component({
   selector: 'app-header',
@@ -34,11 +37,11 @@ export default class HeaderComponent implements OnInit {
     },
   ];
 
-  userId: string = JSON.parse(localStorage.getItem('userInfo') as string)?.userId || '';
+  userId: string;
 
-  token: string = JSON.parse(localStorage.getItem('userInfo') as string)?.token || '';
+  token: string;
 
-  refreshToken: string = JSON.parse(localStorage.getItem('userInfo') as string)?.refreshToken || '';
+  refreshToken: string;
 
   @Select(RSLState.userId) public userId$!: Observable<string>;
 
@@ -46,10 +49,18 @@ export default class HeaderComponent implements OnInit {
 
   @Select(RSLState.refreshToken) public refreshToken$!: Observable<string>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, router: Router, private httpService: HttpService) {
+    this.userId = store.selectSnapshot(RSLState.userId);
+    this.token = store.selectSnapshot(RSLState.token);
+    this.refreshToken = store.selectSnapshot(RSLState.refreshToken);
+    router.events.subscribe((event: NavigationEvent): void => {
+      if (event instanceof NavigationStart) {
+        this.checkTokenValid();
+      }
+    });
+  }
 
   ngOnInit(): void {
-    this.store.dispatch(new SetToken(this.token));
     this.token$.subscribe((token: string): void => {
       if (token) {
         this.isRegistered = true;
@@ -58,7 +69,6 @@ export default class HeaderComponent implements OnInit {
   }
 
   logoutAccount(): void {
-    localStorage.removeItem('userInfo');
     this.store.dispatch(new SetUserId(''));
     this.store.dispatch(new SetToken(''));
     this.store.dispatch(new SetRefreshToken(''));
@@ -68,5 +78,19 @@ export default class HeaderComponent implements OnInit {
 
   toggleMenu(): void {
     this.isActive = !this.isActive;
+  }
+
+  checkTokenValid(): void {
+    const userDate: Date = new Date(this.store.selectSnapshot(RSLState.userData));
+    const time: number = (Date.now() - +userDate) / MILLISECOND;
+    if (time > TokenTimeLimit.end) {
+      this.logoutAccount();
+    } else if (time > TokenTimeLimit.refresh) {
+      this.httpService.getNewToken().subscribe((data: IUserData) => {
+        this.store.dispatch(new SetToken(data.token));
+        this.store.dispatch(new SetRefreshToken(data.refreshToken));
+        this.store.dispatch(new SetUserDate(+Date.now()));
+      });
+    }
   }
 }
