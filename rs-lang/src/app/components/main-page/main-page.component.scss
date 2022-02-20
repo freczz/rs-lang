@@ -33,7 +33,7 @@
   span:last-child {
     position: absolute;
     left: 0;
-    transition: all 0.8s cubic-bezier(0.68,-0.55,0.265,1.55) 0s;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
 
     &:before,
     &:after {
@@ -48,7 +48,7 @@
     }
 
     &:before {
-      background-color: rgba(179,107,243, 0.3);
+      background-color: rgba(179, 107, 243, 0.3);
       border-radius: 48%;
       animation: waves 5s infinite linear;
     }
@@ -184,7 +184,7 @@
           color: #000;
         }
 
-        &:hover .more__waves{
+        &:hover .more__waves {
           top: 450px;
 
           @media (max-width: 1200px) {
@@ -383,7 +383,7 @@
           margin: 0;
           width: 40px;
           height: 40px;
-          
+
           @media (max-width: 1200px) {
             width: calc(28px + 12 * ((100vw - 768px) / (1200 - 768)));
             height: calc(28px + 12 * ((100vw - 768px) / (1200 - 768)));
@@ -441,7 +441,7 @@
           font-size: calc(12px + 8 * ((100vw - 420px) / (768 - 420)));
           line-height: calc(28px + 20 * ((100vw - 420px) / (768 - 420)));
         }
-        
+
         &:hover {
           color: #000;
         }
@@ -464,7 +464,7 @@
           height: 120px;
           top: 320px;
           left: 0;
-          transition: all 0.8s cubic-bezier(0.68,-0.55,0.265,1.55) 0s;
+          transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
 
           @media (max-width: 1200px) {
             width: calc(100px + 20 * ((100vw - 768px) / (1200 - 768)));
@@ -481,7 +481,7 @@
       }
     }
 
-    .opportunities__item:first-child  {
+    .opportunities__item:first-child {
 
       @media (max-width: 768px) {
         margin-top: calc(60px + 80 * ((100vw - 420px) / (768 - 420)));
@@ -681,4 +681,22 @@
       }
     }
   }
+}
+
+.arrow__navigate {
+  position: fixed;
+  bottom: 80px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  z-index: 2;
+  border-radius: 50%;
+  background-color: #9e3af3;
+  mask-image: url('../../../assets/svg/arrow-top.svg');
+  -webkit-mask-image: url('../../../assets/svg/arrow-top.svg');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  cursor: pointer;
 }

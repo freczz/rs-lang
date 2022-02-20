@@ -57,6 +57,8 @@ export const EMAIL_PATTERN: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'
 
 export const PASSWORD_MIN_LENGTH: number = 8;
 
+export const HEIGHT_SCROLL = -80;
+
 export const enum PointsData {
   limitAnswers = 3,
   coefficient = 10,
