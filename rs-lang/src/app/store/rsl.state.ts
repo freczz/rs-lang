@@ -1,7 +1,8 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { IState } from './rsl.interface';
-import { SetPrevVisitedPage, SetToken, SetTextbookPage, SetUserId, SetRefreshToken, SetWordsLevel } from './rsl.action';
+import { SetPrevVisitedPage, SetToken, SetTextbookPage, SetUserId, SetRefreshToken, SetWordsLevel, SetUserSettings, SetUserStatistic, SetUserDate } from './rsl.action';
+import { USER_SETTINGS, USER_STATISTIC } from '../constants/constants';
 
 const initialState: IState = {
   userId: '',
@@ -9,7 +10,10 @@ const initialState: IState = {
   refreshToken: '',
   prevVisitedPage: '',
   textbookPage: '0',
-  wordsLevel: '0'
+  wordsLevel: '0',
+  userSettings : JSON.stringify(USER_SETTINGS),
+  userStatistic: JSON.stringify(USER_STATISTIC),
+  userData: 0,
 };
 
 @State<IState>({
@@ -60,6 +64,27 @@ class RSLState {
     });
   }
 
+  @Action(SetUserSettings)
+  setUserSettings({ patchState }: StateContext<IState>, action: SetUserSettings) {
+    patchState({
+      userSettings: action.userSettings,
+    });
+  }
+
+  @Action(SetUserStatistic)
+  setUserStatistic({ patchState }: StateContext<IState>, action: SetUserStatistic) {
+    patchState({
+      userStatistic: action.userStatistic,
+    });
+  }
+
+  @Action(SetUserDate)
+  setDate({ patchState }: StateContext<IState>, action: SetUserDate) {
+    patchState({
+      userData: action.userData,
+    });
+  }
+
   @Selector()
   public static prevVisitedPage(state: IState): string {
     return state.prevVisitedPage;
@@ -88,6 +113,21 @@ class RSLState {
   @Selector()
   public static wordsLevel(state: IState): string {
     return state.wordsLevel;
+  }
+
+  @Selector()
+  public static userSettings(state: IState): string {
+    return state.userSettings;
+  }
+
+  @Selector()
+  public static userStatistic(state: IState): string {
+    return state.userStatistic;
+  }
+
+  @Selector()
+  public static userData(state: IState): number {
+    return state.userData;
   }
 }
 

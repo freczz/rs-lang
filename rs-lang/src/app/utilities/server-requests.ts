@@ -1,6 +1,12 @@
 import { Store } from '@ngxs/store';
 import { BASE_URL } from '../constants/constants';
-import { IUserSettings, IUserSettingsData, IWordSetter, IWordSpecial } from '../interfaces/interfaces';
+import {
+  IUserSettings,
+  IUserSettingsData,
+  IUserStatisticData,
+  IWordSetter,
+  IWordSpecial,
+} from '../interfaces/interfaces';
 import RSLState from '../store/rsl.state';
 
 async function getAllWordsSpecials(store: Store): Promise<IWordSpecial[]> {
@@ -87,4 +93,26 @@ async function createUserWord(store: Store, wordId: string, word: IWordSetter): 
   });
 }
 
-export { getAllWordsSpecials, getUserSetting, setUserSetting, getUserWord, updateUserWord, createUserWord };
+async function setStatistic(store: Store, option: IUserStatisticData): Promise<void> {
+  const userId: string = store.selectSnapshot(RSLState.userId);
+  const token: string = store.selectSnapshot(RSLState.token);
+  await fetch(`${BASE_URL}users/${userId}/statistics`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(option),
+  });
+}
+
+export {
+  getAllWordsSpecials,
+  getUserSetting,
+  setUserSetting,
+  getUserWord,
+  updateUserWord,
+  createUserWord,
+  setStatistic,
+};

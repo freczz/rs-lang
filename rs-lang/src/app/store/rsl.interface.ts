@@ -5,4 +5,7 @@ export interface IState {
   prevVisitedPage: string;
   textbookPage: string;
   wordsLevel: string;
+  userSettings: string;
+  userStatistic: string;
+  userData: number;
 }
