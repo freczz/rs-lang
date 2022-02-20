@@ -1,5 +1,3 @@
-import { IUserSettingsData, IUserStatisticData } from "../interfaces/interfaces";
-
 export class SetPrevVisitedPage {
   static readonly type = '[RSL] Set previous visited page';
 

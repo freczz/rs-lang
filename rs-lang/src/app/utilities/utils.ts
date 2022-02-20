@@ -28,9 +28,30 @@ function getRandomNumber(count: number): number {
   return Math.floor(Math.random() * count);
 }
 
+function updatePeriod(resultData: IUserStatisticData): void {
+  const statisticsData: IUserStatisticData = resultData;
+  const period: string[] = JSON.parse(statisticsData.optional.period);
+  const gameDate :string = new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'numeric', day: 'numeric'});
+  if (period.length) {
+    const lastState: string = period[period.length - 1];
+    const lastDate: number = (new Date(lastState.split('-')[1])).getDate();
+    const dateNow: number = new Date().getDate();
+    if (dateNow - lastDate) {
+      period.push(`${statisticsData.learnedWords}-${gameDate}`);
+      statisticsData.learnedWords = 0;
+    } else {
+      period[period.length - 1] = `${statisticsData.learnedWords}-${lastState.split('-')[1]}`;
+    }
+  } else {
+    period.push(`${statisticsData.learnedWords}-${gameDate}`);
+  }
+  statisticsData.optional.period = JSON.stringify(period);
+}
+
 function updateWordToLeaned(store: Store, action: number): void {
   const userStatistic: string = store.selectSnapshot(RSLState.userStatistic);
   const resultData: IUserStatisticData = JSON.parse(userStatistic);
+  updatePeriod(resultData);
   switch (action) {
     case ActionLearned.added:
       resultData.learnedWords++;
