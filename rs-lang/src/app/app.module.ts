@@ -23,8 +23,8 @@ import LoadingComponent from './components/sprint-game/loading/loading.component
 import ResultSprintComponent from './components/sprint-game/result-sprint/result-sprint.component';
 import AudiocallGameComponent from './components/audiocall-game/audiocall-game.component';
 import AuthPageComponent from './components/auth-page/auth-page.component';
-import { StatisticPageComponent } from './components/statistic-page/statistic-page.component';
-import { BarChartComponent } from './components/statistic-page/bar-chart/bar-chart.component';
+import StatisticPageComponent from './components/statistic-page/statistic-page.component';
+import BarChartComponent from './components/statistic-page/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [

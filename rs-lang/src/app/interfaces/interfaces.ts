@@ -92,11 +92,13 @@ export interface IWordSpecial extends IWordSetter {
 export interface IGameSettings {
   sprint: string;
   audio: string;
+  period: string;
 }
 
 export interface IUserSettingsData {
   optional: IGameSettings;
   wordsPerDay: number;
+  id?: string;
 }
 
 export interface IUserSettings extends IUserSettingsData {
@@ -186,6 +188,7 @@ export interface IPeriod {
 export interface IUserStatisticData {
   learnedWords: number;
   optional: IPeriod;
+  id?: string
 }
 
 export interface IGameStatistic {

@@ -165,6 +165,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
     this.wordsRu = [];
     this.audios = [];
     this.wordsEng = [];
+    this.wordIds = [];
     this.imgsOfTrueAnswers = [];
     const promises = [];
     if (this.page === '') {

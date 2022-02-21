@@ -105,6 +105,7 @@ export const USER_SETTINGS: IUserSettingsData = {
   optional: {
     sprint: '0-0-0',
     audio: '0-0-0',
+    period: '[]',
   },
   wordsPerDay: 0,
 };

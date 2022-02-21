@@ -1,201 +1,211 @@
 .statistic {
+  .statistic-bg {
+    height: calc(100vh - 80px);
+    background-color: #bdbcf3;
+  }
+
   .statistic-day {
     padding-top: calc(90px + 30 * (100vw - 400px) / 800);
     background-color: #bdbcf3;
 
-
-      .tittle {
-        font-size: calc(32px + 10 * (100vw - 768px) / 432);
-        font-weight: 600;
-        text-align: center;
-        position: relative;
-
-        &::after {
-          position: absolute;
-          content: "";
-          bottom: -30px;
-          left: 10%;
-          width: 80%;
-          height: 3px;
-          background: #000;
-        }
-      }
-
-      .statistic-result {
-        padding-top: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-
-        .learned-words,
-        .correct-answer {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-
-          h2 {
-            font-size: 7rem;
-            font-weight: bold;
-
-            @media (max-width: 768px) {
-              font-size: 5rem;
-            }
-          }
-
-          p {
-            font-size: calc(22px + 6 * (100vw - 768px) / 432);
-            line-height: calc(28px + 8 * (100vw - 768px) / 432);
-            font-weight: 600;
-          }
-        }
-      }
-    }
-  }
-
-  .waves {
-    height: 3rem;
-    width: 100%;
-    background-image: url("../../../assets/svg/firstWave.svg");
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .games-cards {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    gap: 1rem 1rem;
-
-    @media (max-width: 1200px) {
-      flex-direction: column;
-    }
-
-    .game-sprint,
-    .game-audiocall {
-      font-size: 1.1rem;
-      color: #2c2647;
-      display: flex;
-      flex-direction: column;
-      margin: 0.5rem;
-      background-color: #ffffff;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      flex: 0 0 45%;
-      height: 100%;
-      padding: 2%;
-      border: 2px solid #9e3af3;
-      box-shadow: 0 0 5px #9e3af3;
-      border-radius: 20px;
+    .tittle {
+      font-size: calc(32px + 10 * (100vw - 768px) / 432);
+      font-weight: 600;
+      text-align: center;
       position: relative;
 
-      .card-bg {
+      &::after {
         position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        border-radius: 20px;
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        z-index: 1;
-        opacity: 0.2;
+        content: "";
+        bottom: -30px;
+        left: 10%;
+        width: 80%;
+        height: 3px;
+        background: #000;
       }
+    }
 
-      .sprint-bg {
-        background-image: url('../../../assets/svg/mobile_user.svg');
-        background-position: right -90px top 30px;
+    .statistic-result {
+      padding-top: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: 0 10px;
 
-      }
+      .learned-words,
+      .correct-answer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-      .audio-bg {
-        background-image: url('../../../assets/svg/version_control.svg');
-        background-position: left -90px top 30px;
-      }
+        h2 {
+          font-size: 7rem;
+          font-weight: bold;
 
-      h4 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        text-align: center;
-        position: relative;
-        z-index: 2;
+          @media (max-width: 768px) {
+            font-size: 5rem;
+          }
 
-        &::after {
-          content: "";
-          bottom: -10px;
-          left: 25%;
-          position: absolute;
-          height: 2px;
-          width: 50%;
-          background: #000;
+          @media (max-width: 500px) {
+            font-size: 4rem;
+          }
         }
-      }
 
-      ul {
-        padding-top: 10px;
-        z-index: 2;
-
-        .statistic-list {
-          padding: 0.5rem 0;
-          display: flex;
-          align-items: center;
-          flex-direction: row;
-          gap: 0 0.5rem;
-
-          .stats-text {
-            font-size: 1.25rem;
-            font-weight: 500;
-          }
-
-          .stats-icon {
-            display: inline-block;
-            background-position: center;
-            background-size: 100% 100%;
-            width: 28px;
-            height: 28px;
-          }
-
-          .learned {
-            background-image: url("../../../assets/icons/statistic/book.svg");
-          }
-
-          .ratio {
-            background-image: url("../../../assets/icons/statistic/star.svg");
-          }
-
-          .bestLine {
-            background-image: url("../../../assets/icons/statistic/line.svg");
-            width: 28px;
-            height: 15px;
-          }
+        p {
+          font-size: calc(22px + 6 * (100vw - 768px) / 432);
+          line-height: calc(28px + 8 * (100vw - 768px) / 432);
+          font-weight: 600;
+          text-align: center;
         }
       }
     }
   }
-  .statistic-chart {
-    background-color: #bdbcf3;
+}
 
-    .chart {
-      padding: 2rem 0;
+.waves {
+  height: 3rem;
+  width: 100%;
+  background-image: url("../../../assets/svg/firstWave.svg");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-      h2 {
-        font-size: calc(32px + 10 * (100vw - 768px) / 432);
-        font-weight: 600;
-        text-align: center;
-        position: relative;
+.games-cards {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 1rem 1rem;
 
-        &::after {
-          position: absolute;
-          content: "";
-          bottom: -30px;
-          left: 10%;
-          width: 80%;
-          height: 3px;
-          background: #000;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+  }
+
+  .game-sprint,
+  .game-audiocall {
+    font-size: 1.1rem;
+    color: #2c2647;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    flex: 0 0 45%;
+    height: 100%;
+    padding: 2%;
+    border: 2px solid #9e3af3;
+    box-shadow: 0 0 5px #9e3af3;
+    border-radius: 20px;
+    position: relative;
+
+    .card-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 20px;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      z-index: 1;
+      opacity: 0.2;
+    }
+
+    .sprint-bg {
+      background-image: url("../../../assets/svg/mobile_user.svg");
+      background-position: right -90px top 30px;
+    }
+
+    .audio-bg {
+      background-image: url("../../../assets/svg/version_control.svg");
+      background-position: left -90px top 30px;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+
+      &::after {
+        content: "";
+        bottom: -10px;
+        left: 25%;
+        position: absolute;
+        height: 2px;
+        width: 50%;
+        background: #000;
+      }
+    }
+
+    ul {
+      padding-top: 10px;
+      z-index: 2;
+
+      .statistic-list {
+        padding: 0.5rem 0;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 0 0.5rem;
+
+        .stats-text {
+          font-size: 1.25rem;
+          font-weight: 500;
+        }
+
+        .stats-icon {
+          display: inline-block;
+          background-position: center;
+          background-size: 100% 100%;
+          width: 28px;
+          height: 28px;
+        }
+
+        .learned {
+          background-image: url("../../../assets/icons/statistic/book.svg");
+        }
+
+        .ratio {
+          background-image: url("../../../assets/icons/statistic/star.svg");
+        }
+
+        .bestLine {
+          background-image: url("../../../assets/icons/statistic/line.svg");
+          width: 28px;
+          height: 15px;
         }
       }
     }
+  }
+}
+
+.statistic-chart {
+  background-color: #bdbcf3;
+
+  .chart {
+    padding: 2rem 0;
+
+    h2 {
+      font-size: calc(32px + 10 * (100vw - 768px) / 432);
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: "";
+        bottom: -30px;
+        left: 10%;
+        width: 80%;
+        height: 3px;
+        background: #000;
+      }
+    }
+  }
 }
 
 .wrapper {

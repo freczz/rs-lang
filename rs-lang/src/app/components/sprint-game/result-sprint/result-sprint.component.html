@@ -1,9 +1,9 @@
 <div class="popup-result">
   <div class="result-wrapper">
     <div class="result-container">
-      <h2 class="result-title">Успех!</h2>
+      <h2 class="result-title">{{message}}</h2>
       <div class="mistakes">Ошибок:
-        <span class="mistakes-count">{{mistakes}}</span>
+        <span class="mistakes-count">{{mistakesAmount}}</span>
       </div>
       <ul class="wrong-words">
         <li class="wrong-word" *ngFor="let item of wrongWords">
@@ -11,7 +11,7 @@
           <span>{{item.word}} - {{item.wordTranslate}}</span></li>
       </ul>
       <div class="knowing">Знаю:
-        <span class="knowing-count">{{truths}}</span>
+        <span class="knowing-count">{{correctAnswersAmount}}</span>
       </div>
       <ul class="correct-words">
         <li class="correct-word" *ngFor="let item of correctWords">

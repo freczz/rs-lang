@@ -1,13 +1,22 @@
 <div class="statistic-chart">
   <div>
-    <div style="display: block">
+    <div *ngIf="isBarChart">
       <canvas baseChart
         [data]="barChartData"
         [options]="barChartOptions"
-        [plugins]="barChartPlugins"
         [type]="barChartType">
       </canvas>
     </div>
-    <!-- <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button> -->
+    <div *ngIf="!isBarChart">
+      <canvas baseChart
+        [data]="lineChartData"
+        [options]="lineChartOptions"
+        [type]="lineChartType">
+      </canvas>
+    </div>
+    <button class="more__btn btn" (click)="switchChart()">
+      <span class="more__text">Переключить</span>
+      <span class="more__waves"></span>
+    </button>
   </div>
 </div>

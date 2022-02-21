@@ -1,3 +1,106 @@
 .statistic-chart {
   padding: 3%;
 }
+
+.btn {
+  background: transparent;
+  border: 2px solid #9e3af3;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+  border-radius: 20px;
+  font-weight: 600;
+
+  &:hover {
+    border-radius: 20px;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s;
+    box-shadow: 0 0 10px rgba(158, 58, 243, 0.6);
+  }
+
+  span:first-child {
+    position: relative;
+    z-index: 1;
+  }
+
+  span:last-child {
+    position: absolute;
+    left: 0;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 250%;
+      height: 250%;
+      z-index: 4;
+      transform: translate3d(-50%, -96%, 0) rotate(0) scale(1);
+    }
+
+    &:before {
+      background-color: rgba(179, 107, 243, 0.3);
+      border-radius: 48%;
+      animation: waves 5s infinite linear;
+    }
+
+    &:after {
+      background-color: rgba(158, 58, 243, 0.1);
+      border-radius: 42%;
+      animation: waves 10s infinite linear;
+    }
+  }
+
+  @keyframes waves {
+    0% {
+      transform: translate3d(-50%, -96%, 0) rotate(0) scale(1);
+    }
+
+    100% {
+      transform: translate3d(-50%, -96%, 0) rotate(360deg) scale(1);
+    }
+  }
+}
+
+.more__btn {
+  color: #716dab;
+  text-shadow: 0px 0px 1px #9e3af3;
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 20px;
+  line-height: 47px;
+
+  @media (max-width: 1200px) {
+    width: calc(160px + 40 * ((100vw - 768px) / (1200 - 768)));
+    height: calc(40px + 10 * ((100vw - 768px) / (1200 - 768)));
+    font-size: calc(15px + 3 * ((100vw - 768px) / (1200 - 768)));
+    line-height: calc(38px + 9 * ((100vw - 768px) / (1200 - 768)));
+  }
+
+  &:hover {
+    color: #000;
+  }
+
+  &:hover .more__waves {
+    top: 450px;
+
+    @media (max-width: 1200px) {
+      top: calc(360px + 90 * ((100vw - 768px) / (1200 - 768)));
+    }
+  }
+
+  .more__waves {
+    width: 200px;
+    height: 200px;
+    top: 520px;
+
+    @media (max-width: 1200px) {
+      width: calc(160px + 40 * ((100vw - 768px) / (1200 - 768)));
+      height: calc(160px + 40 * ((100vw - 768px) / (1200 - 768)));
+      top: calc(415px + 105 * ((100vw - 768px) / (1200 - 768)));
+    }
+  }
+}
