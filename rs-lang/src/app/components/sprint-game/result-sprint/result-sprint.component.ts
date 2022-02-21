@@ -15,17 +15,20 @@ class ResultSprintComponent implements OnInit {
 
   @Output() replay = new EventEmitter<boolean>();
 
-  mistakes: number = DEFAULT_VALUE;
+  mistakesAmount: number = DEFAULT_VALUE;
 
-  truths: number = DEFAULT_VALUE;
+  correctAnswersAmount: number = DEFAULT_VALUE;
 
   audio: HTMLAudioElement = new Audio();
+
+  message: string = '';
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.mistakes = this.wrongWords.length;
-    this.truths = this.correctWords.length;
+    this.mistakesAmount = this.wrongWords.length;
+    this.correctAnswersAmount = this.correctWords.length;
+    this.setMessage();
   }
 
   playSound(url: string): void {
@@ -40,6 +43,19 @@ class ResultSprintComponent implements OnInit {
 
   goToMainPage(): void {
     this.router.navigate(['']);
+  }
+
+  setMessage(): void {
+    const resultAnswers: number = (this.correctAnswersAmount / (this.correctAnswersAmount + this.mistakesAmount));
+    if (resultAnswers === 1) {
+      this.message = 'Отлично!';
+    } else if (resultAnswers > 0.7) {
+      this.message = 'Хороший результат!';
+    } else if (resultAnswers > 0.4) {
+      this.message = 'Хорошо, но ты можешь лучше!';
+    } else {
+      this.message = 'Как есть!';
+    }
   }
 }
 

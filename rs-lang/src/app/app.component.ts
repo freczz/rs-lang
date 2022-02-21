@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { SetPrevVisitedPage, SetRefreshToken, SetTextbookPage, SetToken, SetUserDate, SetUserId, SetUserSettings, SetUserStatistic, SetWordsLevel } from './store/rsl.action';
 import RSLState from './store/rsl.state';
@@ -8,7 +8,7 @@ import RSLState from './store/rsl.state';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export default class AppComponent implements OnInit {
+export default class AppComponent {
   @HostListener('window: unload', ['$event'])
   handleUnloadEvent(): void {
     window.localStorage.setItem('userId', this.store.selectSnapshot(RSLState.userId));
@@ -22,9 +22,7 @@ export default class AppComponent implements OnInit {
     window.localStorage.setItem('userData', this.store.selectSnapshot(RSLState.userData).toString());
   }
 
-  constructor(private store: Store) {}
-
-  ngOnInit() {
+  constructor(private store: Store) {
     const userId: string = window.localStorage.getItem('userId') ?? '';
     const token: string = window.localStorage.getItem('token') ?? '';
     const refreshToken: string = window.localStorage.getItem('refreshToken') ?? '';

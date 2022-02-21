@@ -15,7 +15,7 @@ import {
   getUserWord,
   updateUserWord,
   createUserWord,
-  setStatistic,
+  setUserStatistic,
 } from './server-requests';
 import RSLState from '../store/rsl.state';
 import { SetUserSettings, SetUserStatistic } from '../store/rsl.action';
@@ -28,10 +28,10 @@ function getRandomNumber(count: number): number {
   return Math.floor(Math.random() * count);
 }
 
-function updatePeriod(resultData: IUserStatisticData): void {
+function updatePeriodStatistic(resultData: IUserStatisticData): void {
   const statisticsData: IUserStatisticData = resultData;
   const period: string[] = JSON.parse(statisticsData.optional.period);
-  const gameDate :string = new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'numeric', day: 'numeric'});
+  const gameDate: string = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
   if (period.length) {
     const lastState: string = period[period.length - 1];
     const lastDate: number = (new Date(lastState.split('-')[1])).getDate();
@@ -48,10 +48,32 @@ function updatePeriod(resultData: IUserStatisticData): void {
   statisticsData.optional.period = JSON.stringify(period);
 }
 
+function updatePeriodSetting(resultData: IUserSettingsData): void {
+  const userSettingData: IUserSettingsData = resultData;
+  const period: string[] = JSON.parse(userSettingData.optional.period);
+  const gameDate: string = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
+  if (period.length) {
+    const lastState: string = period[period.length - 1];
+    const lastDate: number = (new Date(lastState.split('-')[1])).getDate();
+    const dateNow: number = new Date().getDate();
+    if (dateNow - lastDate) {
+      period.push(`${userSettingData.wordsPerDay}-${gameDate}`);
+      userSettingData.wordsPerDay = 0;
+      userSettingData.optional.audio = StatesDefault.game;
+      userSettingData.optional.sprint = StatesDefault.game;
+    } else {
+      period[period.length - 1] = `${userSettingData.wordsPerDay}-${lastState.split('-')[1]}`;
+    }
+  } else {
+    period.push(`${userSettingData.wordsPerDay}-${gameDate}`);
+  }
+  userSettingData.optional.period = JSON.stringify(period);
+}
+
 function updateWordToLeaned(store: Store, action: number): void {
   const userStatistic: string = store.selectSnapshot(RSLState.userStatistic);
   const resultData: IUserStatisticData = JSON.parse(userStatistic);
-  updatePeriod(resultData);
+  updatePeriodStatistic(resultData);
   switch (action) {
     case ActionLearned.added:
       resultData.learnedWords++;
@@ -109,7 +131,7 @@ function updateSettingData(option: string, newWords: number, percent: number, wi
 
 function setUserStatistics(store: Store): void {
   const userStatistic: IUserStatisticData = JSON.parse(store.selectSnapshot(RSLState.userStatistic));
-  setStatistic(store, userStatistic);
+  setUserStatistic(store, userStatistic);
 }
 
 async function updateGameSettings(
@@ -133,6 +155,7 @@ async function updateGameSettings(
   }
   settingsData.wordsPerDay += newWords;
   const option: IUserSettingsData = { wordsPerDay: settingsData.wordsPerDay, optional: settingsData.optional };
+  updatePeriodSetting(option);
   store.dispatch(new SetUserSettings(JSON.stringify(option)));
   setUserStatistics(store);
   setUserSetting(store, option);
@@ -185,4 +208,4 @@ export default function randomNumberByInterval(min: number, max: number): number
   return Math.floor(rand);
 }
 
-export { isRight, getRandomNumber, saveResult, getWordsLearned, setGamesStatistic };
+export { isRight, getRandomNumber, saveResult, getWordsLearned, setGamesStatistic, updatePeriodStatistic, updatePeriodSetting };

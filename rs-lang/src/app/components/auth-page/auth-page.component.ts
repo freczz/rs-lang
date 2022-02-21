@@ -8,6 +8,7 @@ import comparePasswordsValidator from 'src/app/utilities/validators';
 import { Observable } from 'rxjs';
 import { SetRefreshToken, SetToken, SetUserDate, SetUserId } from 'src/app/store/rsl.action';
 import { EMAIL_PATTERN, PASSWORD_MIN_LENGTH } from 'src/app/constants/constants';
+import { getUserSetting, getUserStatistic } from 'src/app/utilities/server-requests';
 import HttpService from './service/http.service';
 
 @Component({
@@ -99,6 +100,8 @@ export default class AuthPageComponent {
         this.store.dispatch(new SetToken(this.token));
         this.store.dispatch(new SetRefreshToken(this.refreshToken));
         this.store.dispatch(new SetUserDate(+Date.now()));
+        getUserSetting(this.store);
+        getUserStatistic(this.store);
       },
       (err: string): void => {
         this.error = err;
