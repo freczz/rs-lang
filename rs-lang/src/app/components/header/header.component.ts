@@ -20,7 +20,7 @@ export default class HeaderComponent implements OnInit {
 
   links: INavLinks[] = [
     {
-      url: '/',
+      url: '/textbook',
       content: 'Учебник',
     },
     {
@@ -61,6 +61,9 @@ export default class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new SetUserId(this.userId));
+    this.store.dispatch(new SetToken(this.token));
+    this.store.dispatch(new SetRefreshToken(this.refreshToken));
     this.token$.subscribe((token: string): void => {
       if (token) {
         this.isRegistered = true;
@@ -86,7 +89,7 @@ export default class HeaderComponent implements OnInit {
     if (time > TokenTimeLimit.end) {
       this.logoutAccount();
     } else if (time > TokenTimeLimit.refresh) {
-      this.httpService.getNewToken().subscribe((data: IUserData) => {
+      this.httpService.getNewToken().subscribe((data: IUserData): void => {
         this.store.dispatch(new SetToken(data.token));
         this.store.dispatch(new SetRefreshToken(data.refreshToken));
         this.store.dispatch(new SetUserDate(+Date.now()));

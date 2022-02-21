@@ -1,4 +1,4 @@
-import { ITeam, IUserSettingsData, IUserStatisticData, IGameStatistic } from '../interfaces/interfaces';
+import { IListWord, ITeam, IUserSettingsData, IUserStatisticData, IGameStatistic } from '../interfaces/interfaces';
 
 export const team: ITeam[] = [
   {
@@ -7,7 +7,7 @@ export const team: ITeam[] = [
     secondName: 'Виринский',
     githubLink: 'freczz',
     status: 'Team lead',
-    tasks: ['Главная страница', '', ''],
+    tasks: ['Главная страница', 'Страница авторизация', 'Страница учебник', 'Работа с Backend'],
   },
   {
     imgLink: 'dmitriy',
@@ -15,7 +15,7 @@ export const team: ITeam[] = [
     secondName: 'Петралай',
     githubLink: 'Dimas-worker',
     status: 'Developer',
-    tasks: ['', '', ''],
+    tasks: ['Игра "Спринт"', 'Страница статистики', 'Долгосрочная статистика', 'Работа со State'],
   },
   {
     imgLink: 'vladislav',
@@ -23,7 +23,7 @@ export const team: ITeam[] = [
     secondName: 'Кочерга',
     githubLink: 'VladKocherga',
     status: 'Developer',
-    tasks: ['', '', ''],
+    tasks: ['Игра "Аудиовызов"', 'Доп. сложность в игре'],
   },
 ];
 
@@ -144,5 +144,26 @@ export const GAME_STATISTIC: IGameStatistic[] = [
     class: 'bestLine',
     title: 'Самая длинная серия правлиьных ответов:',
     value: '0',
-  }
-]
+  },
+];
+
+export const FIRST_CENTRAL_PAGE = 4;
+
+export const LAST_CENTRAL_PAGE = 27;
+
+export const DEFAULT_SELECTED_WORD: IListWord = {
+  id: '',
+  group: '',
+  page: '',
+  word: '',
+  image: '',
+  audio: '',
+  audioMeaning: '',
+  audioExample: '',
+  textMeaning: '',
+  textExample: '',
+  transcription: '',
+  textExampleTranslate: '',
+  textMeaningTranslate: '',
+  wordTranslate: '',
+};

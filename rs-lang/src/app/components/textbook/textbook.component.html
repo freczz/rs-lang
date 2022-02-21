@@ -1,0 +1,86 @@
+<main>
+  <section class="textbook">
+    <div class="textbook__body">
+      <div class="textbook__header header">
+        <div class="container">
+          <div class="header__text">
+            <div
+              class="header__title header__title-left"
+              [class.page-unactive]="isActiveTextbookPage === 'false'"
+              (click)="togglePage($event)"
+            >
+              <h2>{{pagesTitles[0]}}</h2>
+              <p>Все слова в одном месте</p>
+            </div>
+            <div
+              class="header__title header__title-right"
+              [class.page-unactive]="isActiveTextbookPage === 'true'"
+              [class.page-disabled]="isActiveTextbookPage === 'true' && !token"
+              (click)="togglePage($event)"
+            >
+              <h2>{{pagesTitles[1]}}</h2>
+              <p>Только избранно сложные</p>
+            </div>
+          </div>
+          <div class="header__nav nav" *ngIf="isActiveTextbookPage === 'true'">
+            <div
+              class="nav__item item"
+              *ngFor="let item of levels; let i = index"
+              (click)="toggleLevel(item)"
+              [class.item-unactive]="item.group !== activeEnglishLevel"
+            >
+              <div class="item__title">{{item.title}}</div>
+              <div class="item__level">{{item.level}}</div>
+              <div class="item__imgs">
+                <img class="item__img_main" src="../../assets/svg/textbook/waves/wave{{i + 1}}.svg" alt="Wave">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img class="textbook__wave textbook__wave-first" src="../../assets/svg/textbook/wave1.svg" alt="Wave 1">
+      <app-word-list [group]="activeEnglishLevel" [token]="token" [isActiveTextbookPage]="isActiveTextbookPage"></app-word-list>
+      <img class="textbook__wave textbook__wave-second" src="../../assets/svg/textbook/wave2.svg" alt="Wave 2">
+      <div class="textbook__games games">
+        <div class="container">
+          <div class="games__body">
+            <h3 class="games__title">Игры</h3>
+            <p class="games__text">Закрепи свои знания, сыграв в игры</p>
+            <div class="games__items">
+              <div class="games__item item" [ngStyle]="{'background-image': 'url(../../assets/svg/textbook/sprint.svg)'}">
+                <div class="item__body">
+                  <h4 class="item__title">Спринт</h4>
+                  <p class="item__text">Как можно быстрее определи, правильно ли переведено слово.</p>
+                  <button
+                    class="item__button btn"
+                    routerLink="/sprint"
+                    [disabled]="ngAfterViewInit()"
+                    [class.game-disabled]="ngAfterViewInit()"
+                  >
+                    <span class="item__text">Перейти</span>
+                    <span class="item__waves"></span>
+                  </button>
+                </div>
+              </div>
+              <div class="games__item item" [ngStyle]="{'background-image': 'url(../../assets/svg/textbook/audiocall.svg)'}">
+                <div class="item__body">
+                  <h4 class="item__title">Аудиовызов</h4>
+                  <p class="item__text">Попробуй понять, какое слово было произнесено.</p>
+                  <button
+                    class="item__button btn" 
+                    routerLink="/audiocall"
+                    [disabled]="ngAfterViewInit()"
+                    [class.game-disabled]="ngAfterViewInit()"
+                  >
+                    <span class="item__text">Перейти</span>
+                    <span class="item__waves"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

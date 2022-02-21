@@ -1,7 +1,16 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { IState } from './rsl.interface';
-import { SetPrevVisitedPage, SetToken, SetTextbookPage, SetUserId, SetRefreshToken, SetWordsLevel, SetUserSettings, SetUserStatistic, SetUserDate } from './rsl.action';
+import {
+  SetPrevVisitedPage,
+  SetToken, SetTextbookPage,
+  SetUserId, SetRefreshToken,
+  SetWordsLevel, SetUserSettings,
+  SetUserStatistic,
+  SetUserDate,
+  SetEnglishLevel,
+  SetIfIsTextbookPage
+} from './rsl.action';
 import { USER_SETTINGS, USER_STATISTIC } from '../constants/constants';
 
 const initialState: IState = {
@@ -10,10 +19,12 @@ const initialState: IState = {
   refreshToken: '',
   prevVisitedPage: '',
   textbookPage: '0',
+  isTextbookPage: 'true',
   wordsLevel: '0',
   userSettings : JSON.stringify(USER_SETTINGS),
   userStatistic: JSON.stringify(USER_STATISTIC),
   userData: 0,
+  englishLevel: '',
 };
 
 @State<IState>({
@@ -57,10 +68,24 @@ class RSLState {
     });
   }
 
+  @Action(SetIfIsTextbookPage)
+  setIfIsTextbookPage({ patchState }: StateContext<IState>, action: SetIfIsTextbookPage) {
+    patchState({
+      isTextbookPage: action.isTextbookPage,
+    });
+  }
+
   @Action(SetWordsLevel)
   setWordsLevel({ patchState }: StateContext<IState>, action: SetWordsLevel) {
     patchState({
       wordsLevel: action.wordsLevel,
+    });
+  }
+  
+  @Action(SetEnglishLevel)
+  SetEnglishLevel({ patchState }: StateContext<IState>, action: SetEnglishLevel) {
+    patchState({
+      englishLevel: action.englishLevel,
     });
   }
 
@@ -111,6 +136,11 @@ class RSLState {
   }
 
   @Selector()
+  public static isTextbookPage(state: IState): string {
+    return state.isTextbookPage;
+  }
+
+  @Selector()
   public static wordsLevel(state: IState): string {
     return state.wordsLevel;
   }
@@ -128,6 +158,11 @@ class RSLState {
   @Selector()
   public static userData(state: IState): number {
     return state.userData;
+  }
+
+  @Selector()
+  public static englishLevel(state: IState): string {
+    return state.englishLevel;
   }
 }
 

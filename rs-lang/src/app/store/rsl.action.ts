@@ -28,6 +28,12 @@ export class SetTextbookPage {
   constructor(public textbookPage: string) {}
 }
 
+export class SetIfIsTextbookPage {
+  static readonly type = '[RSL] Set if is textbook page';
+
+  constructor(public isTextbookPage: string) {}
+}
+
 export class SetWordsLevel {
   static readonly type = '[RSL] Set words level';
 
@@ -50,4 +56,10 @@ export class SetUserDate {
   static readonly type = '[RSL] Set user date';
 
   constructor(public userData: number) {}
+}
+
+export class SetEnglishLevel {
+  static readonly type = '[RSL] Set english level';
+
+  constructor(public englishLevel: string) {}
 }
