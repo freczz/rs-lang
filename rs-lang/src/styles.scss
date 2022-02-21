@@ -92,3 +92,33 @@ h6 {
 body {
   font-family: 'Montserrat', sans-serif;
 }
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #9998c5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9e3af3;
+    border-radius: 9em;
+    box-shadow: inset 1px 1px 10px #9e3af3;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #752cb6;
+}
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+    background: linear-gradient(120deg, #9998c5 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(240deg, #9998c5 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(0deg, #9998c5 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: #f6f8f4;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+    background:
+        linear-gradient(300deg, #9998c5 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(60deg, #9998c5 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(180deg, #9998c5 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: #f6f8f4;
+}

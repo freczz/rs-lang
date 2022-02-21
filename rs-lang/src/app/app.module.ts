@@ -25,6 +25,8 @@ import AudiocallGameComponent from './components/audiocall-game/audiocall-game.c
 import AuthPageComponent from './components/auth-page/auth-page.component';
 import StatisticPageComponent from './components/statistic-page/statistic-page.component';
 import BarChartComponent from './components/statistic-page/bar-chart/bar-chart.component';
+import TextbookComponent from './components/textbook/textbook.component';
+import WordListComponent from './components/textbook/word-list/word-list.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import BarChartComponent from './components/statistic-page/bar-chart/bar-chart.c
     AudiocallGameComponent,
     StatisticPageComponent,
     BarChartComponent,
+    TextbookComponent,
+    WordListComponent,
   ],
   imports: [
     BrowserModule,

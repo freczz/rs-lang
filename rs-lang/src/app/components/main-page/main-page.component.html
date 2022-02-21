@@ -11,8 +11,8 @@
           <h1 class="greeting__title">RS Lang</h1>
           <p class="greeting__text">Мир не стоит на месте. Необходимость в знании английского языка растёт с каждым днем. Ты тоже не стой на месте! Учи английский вместе с RS Lang!</p>
           <div class="greeting__more more">
-            <a class="more__btn btn" routerLink="/">
-              <span class="more__text">Узнать больше</span>
+            <a class="more__btn btn" routerLink="/authorization">
+              <span class="more__text">Регистрация</span>
               <span class="more__waves"></span>
             </a>
           </div>
@@ -38,7 +38,7 @@
               <h3>Учебник</h3>
             </div>
             <p class="opportunities__item__content__text">Более 3500 простых, а также не очень, слов собраны в одном месте, разделённом на 6 разделов в зависимости от уровня подготовки с удобной навигацией.</p>
-            <a class="opportunities__item__content__btn btn" routerLink="/">
+            <a class="opportunities__item__content__btn btn" routerLink="/textbook">
               <span class="opportunities__item__content__btn__text">Перейти</span>
               <span class="opportunities__item__content__btn__waves"></span>
             </a>
@@ -51,10 +51,16 @@
               <h3>Игры</h3>
             </div>
             <p class="opportunities__item__content__text">Имеются 2 увлекательные игры на развитие запоминания слов (игра "Спринт") и восприятия слов на слух (игра "Аудиовызов").</p>
-            <a class="opportunities__item__content__btn btn" routerLink="/">
-              <span class="opportunities__item__content__btn__text">Перейти</span>
-              <span class="opportunities__item__content__btn__waves"></span>
-            </a>
+            <div class="opportunities__item__content__buttons">
+              <a class="opportunities__item__content__btn btn" routerLink="/sprint">
+                <span class="opportunities__item__content__btn__text">Спринт</span>
+                <span class="opportunities__item__content__btn__waves"></span>
+              </a>
+              <a class="opportunities__item__content__btn btn" routerLink="/audiocall">
+                <span class="opportunities__item__content__btn__text">Аудиовызов</span>
+                <span class="opportunities__item__content__btn__waves"></span>
+              </a>
+            </div>
           </div>
           <div class="opportunities__item__img">
             <img src="assets/svg/games.svg" alt="Games">
@@ -70,7 +76,7 @@
               <h3>Статистика</h3>
             </div>
             <p class="opportunities__item__content__text">Весь прогресс обучения в одном месте. Представлены данные как за текущий день, так и за весь период, как в виде таблицы, так и в виде графиков. Очень удобно!</p>
-            <a class="opportunities__item__content__btn btn" routerLink="/">
+            <a class="opportunities__item__content__btn btn" routerLink="/statistic">
               <span class="opportunities__item__content__btn__text">Перейти</span>
               <span class="opportunities__item__content__btn__waves"></span>
             </a>

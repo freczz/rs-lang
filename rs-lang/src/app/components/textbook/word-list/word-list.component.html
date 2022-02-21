@@ -1,0 +1,129 @@
+<div class="list">
+  <div class="container">
+    <div class="list__title">Список слов</div>
+    <div class="list__body">
+      <div class="list__words words">
+        <div
+          class="words__item item"
+          *ngFor="let word of words"
+          [style.backgroundColor]="word === this.selectedWord ? this.groupColor[+this.group] : this.defaultColor"
+          [class.hard-word]="!isActiveTextbookPage || newHardWords.includes(word.id)"
+          [class.learned-word]="newLearnedWords.indexOf(word.id) > -1"
+          (click)="chooseWord(word)"
+        >
+          <div class="item__title">{{word.word}}</div>
+          <div class="item__translate">{{word.wordTranslate}}</div>
+        </div>
+      </div>
+      <div class="list__details details">
+        <div class="details__img" [style.backgroundImage]="background"></div>
+        <div class="details__word">
+          {{selectedWord.word}} <span>{{selectedWord.transcription}}</span>
+        </div>
+        <div class="details__translate_and_audio">
+          {{selectedWord.wordTranslate}}
+          <button
+            type="button"
+            [ngStyle]="{'background-image': 'url(../../assets/svg/textbook/words/audio.svg)'}"
+            (click)="startAudio()"
+          ></button>
+        </div>
+        <div class="details__buttons" *ngIf="userId">
+          <div class="details__hard">
+            <button
+              (click)="addNewWord(newHardWords, newLearnedWords)"
+              *ngIf="!newHardWords.includes(selectedWord.id)"
+              [disabled]="(newHardWords.indexOf(selectedWord.id) > -1)"
+            >+ В сложные</button>
+            <button (click)="removeUserWord(newHardWords)" *ngIf="newHardWords.includes(selectedWord.id)">- Из сложных</button>
+          </div>
+          <div class="details__studied" *ngIf="isActiveTextbookPage">
+            <button (click)="addNewWord(newLearnedWords, newHardWords)" *ngIf="!newLearnedWords.includes(selectedWord.id)">+ В изученные</button>
+            <button (click)="removeUserWord(newLearnedWords)" *ngIf="newLearnedWords.includes(selectedWord.id)">- Из изученных</button>
+          </div>
+        </div>
+        <div class="details__meaning meaning">
+          <p class="meaning__title">Значение</p>
+          <p class="meaning__eng" #meaningEng></p>
+          <p class="meaning__rus">{{selectedWord.textMeaningTranslate}}</p>
+        </div>
+        <div class="details__examples examples">
+          <p class="examples__title">Пример</p>
+          <p class="examples__eng" #examplesEng></p>
+          <p class="examples__rus">{{selectedWord.textExampleTranslate}}</p>
+        </div>
+        <div class="details__progress progress" *ngIf="userId">
+          <div class="progress__title">Прогресс изучения</div>
+          <div class="progress__value">{{wordProgress}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="list__pagination pagination" *ngIf="isActiveTextbookPage">
+      <div class="pagination__body">
+        <div class="pagination__prev">
+          <button (click)="changePage(page - 1)"><</button>
+        </div>
+        <ul class="pagination__list">
+          <li class="pagination__page">
+            <button
+              (click)="checkPage($event)"
+              [class.page-active]="page === 0"
+              [class.learned-page]="learnedPages[0]"
+            >1</button>
+          </li>
+          <li class="pagination__page">
+            <button
+              (click)="checkPage($event)"
+              *ngIf="page < firstCentralPage"
+              [class.page-active]="page === 1"
+              [class.learned-page]="learnedPages[1]"
+            >2</button>
+            <div *ngIf="page >= firstCentralPage">...</div>
+          </li>
+          <li class="pagination__page">
+            <button
+              (click)="checkPage($event)"
+              [textContent]="centralPage - 1"
+              [class.page-active]="page === 2"
+              [class.learned-page]="learnedPages[centralPage - 2]"
+            ></button>
+          </li>
+          <li class="pagination__page">
+            <button (click)="checkPage($event)"
+              [textContent]="centralPage"
+              [class.page-active]="page === centralPage - 1"
+              [class.learned-page]="learnedPages[centralPage - 1]"
+            ></button>
+          </li>
+          <li class="pagination__page">
+            <button
+              (click)="checkPage($event)"
+              [textContent]="centralPage + 1"
+              [class.page-active]="page === maxPage - firstCentralPage + 1"
+              [class.learned-page]="learnedPages[centralPage]"
+            ></button>
+          </li>
+          <li class="pagination__page">
+            <button
+              (click)="checkPage($event)"
+              *ngIf="page >= maxPage - firstCentralPage"
+              [class.page-active]="page === maxPage - 2"
+              [class.learned-page]="learnedPages[maxPage - 2]"
+            >{{maxPage - 1}}</button>
+            <div *ngIf="page < maxPage - firstCentralPage">...</div>
+          </li>
+          <li class="pagination__page">
+            <button
+              (click)="checkPage($event)"
+              [class.page-active]="page === maxPage - 1"
+              [class.learned-page]="learnedPages[maxPage - 1]"
+            >{{maxPage}}</button>
+          </li>
+        </ul>
+        <div class="pagination__next">
+          <button (click)="changePage(page + 1)">></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

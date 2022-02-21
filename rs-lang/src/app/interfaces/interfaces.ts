@@ -44,7 +44,6 @@ export interface IGameResult {
   longLine: number;
   bestLine: number;
 }
-
 export interface ISprint {
   gameStatistic: IGameResult;
   score: number;
@@ -158,6 +157,29 @@ export interface IWords {
   wordTranslate: string;
 }
 
+export interface ILevels {
+  title: string;
+  level: string;
+  group: string;
+}
+
+export interface IListWord {
+  id: string;
+  group: string;
+  page: string;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  textExampleTranslate: string;
+  textMeaningTranslate: string;
+  wordTranslate: string;
+}
+
 export type Words = IWords[];
 
 export interface IFormData {
@@ -188,7 +210,7 @@ export interface IPeriod {
 export interface IUserStatisticData {
   learnedWords: number;
   optional: IPeriod;
-  id?: string
+  id?: string;
 }
 
 export interface IGameStatistic {
