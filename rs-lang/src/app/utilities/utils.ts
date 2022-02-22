@@ -37,8 +37,8 @@ function updatePeriodStatistic(resultData: IUserStatisticData): void {
     const lastDate: number = (new Date(lastState.split('-')[1])).getDate();
     const dateNow: number = new Date().getDate();
     if (dateNow - lastDate) {
-      period.push(`${statisticsData.learnedWords}-${gameDate}`);
       statisticsData.learnedWords = 0;
+      period.push(`${statisticsData.learnedWords}-${gameDate}`);
     } else {
       period[period.length - 1] = `${statisticsData.learnedWords}-${lastState.split('-')[1]}`;
     }
@@ -57,8 +57,8 @@ function updatePeriodSetting(resultData: IUserSettingsData): void {
     const lastDate: number = (new Date(lastState.split('-')[1])).getDate();
     const dateNow: number = new Date().getDate();
     if (dateNow - lastDate) {
-      period.push(`${userSettingData.wordsPerDay}-${gameDate}`);
       userSettingData.wordsPerDay = 0;
+      period.push(`${userSettingData.wordsPerDay}-${gameDate}`);
       userSettingData.optional.audio = StatesDefault.game;
       userSettingData.optional.sprint = StatesDefault.game;
     } else {

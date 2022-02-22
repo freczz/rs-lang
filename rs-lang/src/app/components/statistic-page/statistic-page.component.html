@@ -53,7 +53,7 @@
         <div class="chart">
           <h2>Статистика за все время</h2>
         </div>
-        <app-bar-chart></app-bar-chart>
+        <app-bar-chart *ngIf="isRenderChart"></app-bar-chart>
       </div>
     </section>
   </div>
