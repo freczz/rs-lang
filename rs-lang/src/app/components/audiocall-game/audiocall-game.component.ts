@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, HostListener, OnInit } from '@angular
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { getAllWordsSpecials } from '../../utilities/server-requests';
 import RSLState from '../../store/rsl.state';
 import {
   COUNT_ANSWER,
@@ -12,8 +13,8 @@ import {
   NextOrKnow,
   DEFAULT_VALUE,
 } from '../../constants/constants';
-import { IAudiocallGame, IGameResult, Words } from '../../interfaces/interfaces';
-import randomNumberByInterval, { saveResult, setGamesStatistic } from '../../utilities/utils';
+import { IAudiocallGame, IGameResult, IWordSpecial, Words } from '../../interfaces/interfaces';
+import randomNumberByInterval, { getWordsLearned, saveResult, setGamesStatistic } from '../../utilities/utils';
 
 @Component({
   selector: 'app-audiocall-game',
@@ -32,15 +33,25 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
   @ViewChild('answersContainer', { static: false })
   answersContainer: ElementRef = { nativeElement: '' };
 
+  learnedWords: string[] = [];
+
+  isNext: boolean = true;
+
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     const { key } = event;
     switch (key) {
-      case ' ':
+      case 'Enter':
         this.playAudio();
         break;
-      case 'Enter':
-        this.showNextQuestion();
+      case ' ':
+        if (this.isNext) {
+          this.showNextQuestion();
+          this.isNext = false;
+          setTimeout(() => {
+            this.isNext = true;
+          }, 1000);
+        }
         break;
       case '1':
       case '2':
@@ -54,9 +65,9 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
     }
   }
 
-  prevVisitedPage = '';
+  prevVisitedPage: string = '';
 
-  page = '';
+  page: string = '';
 
   numberRound: number = 0;
 
@@ -120,22 +131,38 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
 
   visibleHeart: boolean = false;
 
+  changeStatus: boolean = true;
+
+  generateWordsStatus: boolean = false;
+
   @Select(RSLState.prevVisitedPage) public prevVisitedPage$!: Observable<string>;
 
   constructor(private store: Store, private router: Router) {
     this.isRegistered = !!this.store.selectSnapshot(RSLState.userId);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.prevVisitedPage = this.store.selectSnapshot(RSLState.prevVisitedPage);
     if (this.prevVisitedPage === 'textbook') {
       this.visibleSwitchLevel = false;
       this.lvlNumber = this.store.selectSnapshot(RSLState.wordsLevel);
       this.page = this.store.selectSnapshot(RSLState.textbookPage);
       this.roundCount = 20;
+      this.heartCount = new Array(this.roundCount);
+      if (this.isRegistered) {
+        this.learnedWords = await this.getSpecialsWords();
+        if (this.learnedWords.length <= 3 && this.page !== '0') {
+          this.page = String(Number(this.page) - 1);
+        }
+      }
       this.generateAnswers();
       this.visibleAudiocallGame = true;
     }
+  }
+
+  async getSpecialsWords(): Promise<string[]> {
+    const special: IWordSpecial[] = await getAllWordsSpecials(this.store);
+    return getWordsLearned(special);
   }
 
   setCheckboxStatus(e: MouseEvent): void {
@@ -160,12 +187,12 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
   }
 
   async generateAnswers(): Promise<void> {
+    this.isNext = true;
     this.nextOrKnow = NextOrKnow.know;
     this.visibleCardContainer = false;
     this.wordsRu = [];
     this.audios = [];
     this.wordsEng = [];
-    this.wordIds = [];
     this.imgsOfTrueAnswers = [];
     const promises = [];
     if (this.page === '') {
@@ -207,6 +234,9 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
 
   setTrueAnswerFromTextbook(words: Words[]): void {
     this.trueAnswerNumber = randomNumberByInterval(DEFAULT_VALUE, 4);
+    if (this.learnedWords.includes(words[0][this.numberRound].id)) {
+      this.numberRound++;
+    }
     this.imgsOfTrueAnswers[this.trueAnswerNumber] = words[0][this.numberRound].image;
     this.wordsEng[this.trueAnswerNumber] = words[0][this.numberRound].word;
     this.wordsRu[this.trueAnswerNumber] = words[0][this.numberRound].wordTranslate;
@@ -219,7 +249,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
     this.audio.play();
   }
 
-  async getWords(): Promise<any> {
+  async getWords(): Promise<Words> {
     if (this.page === '') {
       const page: number = randomNumberByInterval(DEFAULT_VALUE, MAX_PAGE);
       return fetch(`${SERVER_LINK}words?page=${page}&group=${this.lvlNumber}`)
@@ -249,6 +279,9 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
   receiveAnswer(answerNumber: string, event?: MouseEvent): void {
     this.buttonDisabled = true;
     let answerText: string;
+    if (!this.changeStatus) {
+      return;
+    }
     if (answerNumber) {
       answerText = (
         (this.answersContainer.nativeElement as Node).childNodes[+answerNumber - 1] as HTMLElement
@@ -277,6 +310,7 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
       this.heartCount.splice(DEFAULT_VALUE, 1);
     }
     saveResult(this.gameStatistic, this.curWordId, answerText === this.wordsRu[this.trueAnswerNumber]);
+    this.changeStatus = false;
   }
 
   showTrueAnswer(): void {
@@ -289,13 +323,14 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
   showNextQuestion(): void {
     this.buttonDisabled = false;
     if (this.nextOrKnow === 'Не знаю') {
+      this.isNext = true;
       this.heartCount.splice(DEFAULT_VALUE, 1);
       saveResult(this.gameStatistic, this.curWordId, false);
       if (this.roundCount === this.numberRound) {
         this.showResult();
       }
       (
-        (this.answersContainer.nativeElement as Node).childNodes[this.trueAnswerNumber!] as HTMLElement
+        (this.answersContainer.nativeElement as Node).childNodes[this.trueAnswerNumber] as HTMLElement
       ).style.backgroundColor = 'green';
       this.wordsLose[0].push(this.wordsEng[this.trueAnswerNumber]);
       this.wordsLose[1].push(this.wordsRu[this.trueAnswerNumber]);
@@ -304,13 +339,16 @@ export default class AudiocallGameComponent implements OnInit, IAudiocallGame {
       this.nextOrKnow = NextOrKnow.next;
       this.red = false;
     } else {
+      this.isNext = true;
       this.generateAnswers();
+      this.changeStatus = true;
       this.nextOrKnow = 'Не знаю';
       this.red = false;
     }
   }
 
   showResult(): void {
+    this.isNext = false;
     this.visibleResult = true;
     this.visibleAudiocallGame = false;
     this.visibleHeart = false;
