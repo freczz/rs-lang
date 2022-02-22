@@ -9,6 +9,7 @@ import {
   DEFAULT_VALUE,
   FIRST_CENTRAL_PAGE,
   LAST_CENTRAL_PAGE,
+  StatesDefault,
 } from 'src/app/constants/constants';
 import { IListWord, IOptionStats, IWordSetter, IWordSpecial } from 'src/app/interfaces/interfaces';
 import { SetEnglishLevel, SetPrevVisitedPage, SetTextbookPage } from 'src/app/store/rsl.action';
@@ -239,7 +240,7 @@ export default class WordListComponent implements OnInit, OnDestroy {
       .catch((): void => {
         const newUserWord: IWordSetter = {
           difficulty: newWordDifficulty,
-          optional: { status: '' },
+          optional: { status: StatesDefault.game },
         };
         createUserWord(this.store, newWordId, newUserWord);
       });

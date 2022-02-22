@@ -25,11 +25,14 @@ class StatisticPageComponent implements OnInit {
 
   audioStatistic: IGameStatistic[] = [];
 
+  isRenderChart: boolean = false;
+
   constructor(private store: Store) {
     this.isRegistered = !!this.store.selectSnapshot(RSLState.userId);
   }
 
   async ngOnInit(): Promise<void> {
+    this.isRenderChart = false;
     if (this.isRegistered) {
       const setting: IUserSettingsData = JSON.parse(this.store.selectSnapshot(RSLState.userSettings));
       const statistic: IUserStatisticData = JSON.parse(this.store.selectSnapshot(RSLState.userStatistic));
@@ -51,6 +54,7 @@ class StatisticPageComponent implements OnInit {
         return resultElem;
       });
     }
+    this.isRenderChart = true;
   }
 
   async getAllWordsLearned(statistic: IUserStatisticData) {
