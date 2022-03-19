@@ -1,0 +1,60 @@
+<div class="statistic">
+  <div class="statistic-bg" *ngIf="!isRegistered"></div>
+  <div class="container" *ngIf="isRegistered">
+    <section class="statistic-day">
+      <div class="wrapper">
+        <h2 class="tittle">Статистика за сегодня</h2>
+        <div class="statistic-result">
+          <div class="learned-words">
+            <h2>{{wordPerDay}}</h2>
+            <p>новых слов</p>
+          </div>
+          <div class="learned-words">
+            <h2>{{wordsLearned}}</h2>
+            <p>слов изучено</p>
+          </div>
+          <div class="correct-answer">
+            <h2>{{percentAnswers}}%</h2>
+            <p>правильных ответо</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <img src="../../../assets/svg/firstWave.svg" alt="wave">
+    <section>
+      <div class="wrapper">
+        <div class="games-cards">
+          <div class="game-sprint">
+            <div class="card-bg sprint-bg"></div>
+            <h4>Спринт</h4>
+            <ul>
+              <li class="statistic-list" *ngFor="let item of sprintStatistics">
+                <span class="stats-icon {{item.class}}"></span>
+                <span class="stats-text">{{item.title}} <b>{{item.value}}</b></span>
+              </li>
+            </ul>
+          </div>
+          <div class="game-audiocall">
+            <div class="card-bg audio-bg"></div>
+            <h4>Аудиовызов</h4>
+            <ul>
+              <li class="statistic-list" *ngFor="let item of audioStatistic">
+                <span class="stats-icon {{item.class}}"></span>
+                <span class="stats-text">{{item.title}} <b>{{item.value}}</b></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <img src="../../../assets/svg/secondWave.svg" alt="wave">
+    <section class="statistic-chart">
+      <div class="wrapper">
+        <div class="chart">
+          <h2>Статистика за все время</h2>
+        </div>
+        <app-bar-chart *ngIf="isRenderChart"></app-bar-chart>
+      </div>
+    </section>
+  </div>
+</div>

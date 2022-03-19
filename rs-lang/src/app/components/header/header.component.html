@@ -1,0 +1,36 @@
+<header class="header">
+  <div class="container">
+    <div [class.header__body]="true" [class.header-active]="isActive">
+      <a routerLink="/" routerLinkActive="active-link" class="header__logo">
+        <img class="header__logo_main" src="assets/svg/logo.svg" alt="Logo">
+        <img class="header__logo_side" src="assets/svg/logo2hover.svg" alt="Logo2">
+      </a>
+      <div class="header__burger-menu menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle" (click)="toggleMenu()">
+          <span></span>
+        </label>
+      </div>
+      <nav #nav class="header__nav nav" [ngStyle]="{'background-image': 'url(./assets/svg/map.svg)'}">
+        <ul class="nav__list">
+          <li class="nav__item" *ngFor="let item of links">
+            <a class="nav__link" routerLink="{{item.url}}" routerLinkActive="active-link">{{item.content}}</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="header__login login" *ngIf='!isRegistered'>
+        <a class="login__link btn" routerLink="/authorization">
+          <span class="login__text">Вход</span>
+          <span class="login__waves"></span>
+        </a>
+      </div>
+      <div class="header__logout logout" *ngIf='isRegistered'>
+        <a class="logout__link" routerLink="/" (click)="logoutAccount()">
+          <p>Выйти</p>
+          <img class="logout__img_main" src="assets/svg/logout.svg" alt="logout">
+          <img class="logout__img_side" src="assets/svg/logout2hover.svg" alt="logout2">
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

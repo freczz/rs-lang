@@ -1,0 +1,75 @@
+<div class="background"></div>
+<div class="switch-level-popup" *ngIf="visibleSwitchLevel">
+  <h2 class="level-title">Выберите уровень</h2>
+  <div class="circles">
+    <div class="circle"
+    *ngFor="let item of levels"
+    #levelNumber
+    (click)="switchLevel($event)">
+      {{ item }}
+    </div>
+  </div>
+  <input type="checkbox"
+  class="custom-checkbox"
+  id = "check"
+  (click) = "setCheckboxStatus($event)">
+<label for="check">Повышенный уровень сложности</label>
+</div>
+<div class="audiocall-container"
+ *ngIf="visibleAudiocallGame"
+  #audiocallContainer>
+  <div class="volume-img"
+  #audioPlay
+  (click)="playAudio()"></div>
+  <div class="hearts-container" *ngIf = "visibleHeart">
+    <div class="heart" *ngFor = "let item of heartCount; index as i"></div>
+  </div>
+  <div class="card-container" *ngIf="visibleCardContainer">
+    <div class="true-answer-img" [style.background]="trueAnswerImage"></div>
+    <p class="answer-text">{{ answerText }}</p>
+  </div>
+  <div class="answers-container" #answersContainer>
+    <div class="boat"
+    [ngClass]="{ red: red }"
+    *ngFor="let item of wordsRu; index as i">
+      <div class="cabin">{{ i + 1 }}</div>
+      <button class="answer"
+      [disabled]="buttonDisabled"
+      (click)="receiveAnswer('', $event)">{{ item }}</button>
+    </div>
+  </div>
+  <div [style.background]="fullscreenBackground"
+  (click)="switchFullscreen()"
+  class="fullscreen-button"></div>
+  <button class="next-or-know" (click)="showNextQuestion()">{{ nextOrKnow }}</button>
+</div>
+<div class="result-popup" *ngIf="visibleResult">
+  <div class="result-container">
+    <div class="mistakes">
+      <h2 class="result-title">Результат игры</h2>
+      <h2>
+        Количество правильных : <span class="green">{{ wordsWin[0].length }} </span>
+      </h2>
+      <div class="result-answer" *ngFor="let item of wordsWin[0]; index as i">
+        <div class="volume-answer"
+        [attr.data-number]="i + ' win'"
+        (click)="playAuidoInResult($event)"></div>
+        <p class="answer-eng">{{ wordsWin[0][i] }} -</p>
+        <p class="answer-ru">{{ wordsWin[1][i] }}</p>
+      </div>
+      <h2>
+        Количество ошибок : <span class="red">{{ wordsLose[0].length }} </span>
+      </h2>
+      <div class="result-answer" *ngFor="let item of wordsLose[0]; index as i">
+        <div class="volume-answer"
+        [attr.data-number]="i + ' lose'"
+        (click)="playAuidoInResult($event)"></div>
+        <p class="answer-eng">{{ wordsLose[0][i] }} -</p>
+        <p class="answer-ru">{{ wordsLose[1][i] }}</p>
+      </div>
+      <button class="outplay-button" (click)="resetResult()">Сыграть еще раз</button>
+      <button class="on-main-button" (click) = "goToMainPage()">На главную</button>
+    </div>
+    <div class="words-know"></div>
+  </div>
+</div>
